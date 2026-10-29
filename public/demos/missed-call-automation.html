@@ -1,0 +1,601 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Missed-Call WhatsApp Booking Recovery — Demo by DSP</title>
+  <meta name="description" content="Instantly catch high-value clients who call when your phone is busy or after business hours." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:       #0c0c0c;
+      --bg2:      #141414;
+      --bg3:      #1a1a1a;
+      --border:   #222;
+      --muted:    #444;
+      --subtle:   #777;
+      --text:     #ccc;
+      --strong:   #f0f0f0;
+      --red:      #e05555;
+      --red-dim:  #2a1515;
+      --green:    #4caf7d;
+      --green-dim:#0f2a1a;
+      --gold:     #c9a84c;
+      --sans: 'Inter', system-ui, sans-serif;
+      --serif: 'Playfair Display', Georgia, serif;
+    }
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+    body { background: var(--bg); color: var(--text); font-family: var(--sans); font-size: 1rem; line-height: 1.6; }
+    a { color: inherit; text-decoration: none; }
+    ::selection { background: var(--strong); color: var(--bg); }
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-thumb { background: var(--border); }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 3rem; height: 60px;
+      background: rgba(12,12,12,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-brand { font-size: 0.85rem; font-weight: 500; color: var(--strong); letter-spacing: 0.04em; }
+    .nav-back {
+      font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--subtle); display: flex; align-items: center; gap: 6px;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--strong); }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 120px 3rem 70px;
+      max-width: 920px; margin: 0 auto; text-align: center;
+    }
+    .hero-label {
+      font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-family: var(--serif); font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 400; line-height: 1.15; color: var(--strong);
+      margin-bottom: 1.25rem; letter-spacing: -0.01em;
+    }
+    .hero h1 em { font-style: italic; }
+    .hero-sub {
+      font-size: 1rem; color: var(--subtle); max-width: 620px;
+      margin: 0 auto 2.5rem; line-height: 1.8;
+    }
+    .hero-scroll {
+      font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); display: flex; align-items: center; gap: 8px; justify-content: center;
+    }
+    .hero-scroll::after { content: '↓'; }
+
+    /* ── SCENARIO INTRO ── */
+    .scenario {
+      max-width: 760px; margin: 0 auto; padding: 0 3rem 5rem;
+      text-align: center;
+    }
+    .scenario-name {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--bg2); border: 1px solid var(--border);
+      padding: 0.6rem 1.25rem; margin-bottom: 2rem;
+      font-size: 0.82rem; color: var(--text);
+    }
+    .scenario-name span { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); display: inline-block; }
+    .scenario p { font-size: 0.95rem; color: var(--subtle); line-height: 1.9; margin-bottom: 1rem; }
+
+    /* ── COMPARISON ── */
+    .comparison-wrap { padding: 0 2rem 5rem; max-width: 1200px; margin: 0 auto; }
+    .comparison-header {
+      display: grid; grid-template-columns: 1fr 60px 1fr;
+      gap: 0; margin-bottom: 2px; text-align: center;
+    }
+    .col-label {
+      padding: 1rem; font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 500;
+    }
+    .col-label.before { background: var(--red-dim); color: var(--red); border: 1px solid #3a1515; }
+    .col-label.after  { background: var(--green-dim); color: var(--green); border: 1px solid #0f3a20; }
+    .col-divider-top  { background: var(--bg); display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: var(--muted); }
+
+    .steps { display: flex; flex-direction: column; gap: 2px; }
+
+    .step-row {
+      display: grid; grid-template-columns: 1fr 60px 1fr;
+      gap: 0; min-height: 100px;
+      opacity: 0; transform: translateY(16px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .step-row.visible { opacity: 1; transform: translateY(0); }
+
+    .step-card {
+      padding: 1.5rem 1.75rem;
+      display: flex; flex-direction: column; gap: 0.5rem;
+      border: 1px solid transparent;
+    }
+    .step-card.before-card {
+      background: var(--red-dim); border-color: #2e1515;
+      border-right: none;
+    }
+    .step-card.after-card {
+      background: var(--green-dim); border-color: #102e1a;
+      border-left: none;
+    }
+    .step-num {
+      font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 0.25rem;
+    }
+    .step-icon { font-size: 1.4rem; margin-bottom: 0.25rem; }
+    .step-title { font-size: 0.95rem; font-weight: 500; }
+    .step-title.red   { color: var(--red); }
+    .step-title.green { color: var(--green); }
+    .step-body { font-size: 0.82rem; color: var(--subtle); line-height: 1.7; }
+    .step-tag {
+      display: inline-block; margin-top: 0.5rem;
+      font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 3px 10px; border-radius: 2px;
+      align-self: flex-start;
+    }
+    .step-tag.pain   { background: rgba(224,85,85,0.12); color: var(--red); }
+    .step-tag.gain   { background: rgba(76,175,125,0.12); color: var(--green); }
+
+    .step-divider {
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 4px;
+      background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      font-size: 0.65rem; color: var(--muted); letter-spacing: 0.08em; text-align: center;
+      padding: 0.5rem 0;
+    }
+    .step-divider .vs { font-size: 0.9rem; color: var(--muted); font-weight: 300; }
+
+    /* ── TIMELINE GRAPHIC ── */
+    .timeline-section {
+      max-width: 1200px; margin: 0 auto 5rem; padding: 0 2rem; text-align: center;
+    }
+    .timeline-label {
+      font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.75rem; display: inline-block;
+    }
+    .timeline-section h2 {
+      font-family: var(--serif); font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+      font-weight: 400; color: var(--strong); margin-bottom: 0.75rem; letter-spacing: -0.01em;
+    }
+    .timeline-desc {
+      font-size: 0.95rem; color: var(--subtle); max-width: 680px; margin: 0 auto 2.5rem; line-height: 1.8;
+    }
+
+    .timeline-bar {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; text-align: left;
+      position: relative;
+    }
+    .timeline-node {
+      background: var(--bg2); border: 1px solid var(--border); border-radius: 6px;
+      padding: 1.5rem; display: flex; flex-direction: column; gap: 8px; position: relative;
+    }
+    .timeline-time {
+      font-family: monospace; font-size: 1.1rem; color: var(--green); font-weight: 600;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .timeline-time span {
+      font-size: 0.68rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; font-family: var(--sans);
+    }
+    .timeline-title {
+      font-size: 1rem; font-weight: 600; color: var(--strong);
+    }
+    .timeline-body {
+      font-size: 0.8rem; color: var(--subtle); line-height: 1.6;
+    }
+    .timeline-snippet {
+      margin-top: 8px; background: var(--bg); border: 1px solid var(--border);
+      border-radius: 4px; padding: 10px 12px; font-size: 0.74rem; font-family: monospace; color: #7dd3fc; line-height: 1.5;
+    }
+
+    /* ── RESULT STRIP ── */
+    .result-strip {
+      max-width: 1200px; margin: 0 auto 4rem; padding: 0 2rem;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+      background: var(--border);
+    }
+    .result-card {
+      background: var(--bg2); padding: 2rem 1.75rem; text-align: center;
+    }
+    .result-value {
+      font-family: var(--serif); font-size: 2.4rem; color: var(--green); font-weight: 400;
+      margin-bottom: 0.25rem;
+    }
+    .result-label { font-size: 0.78rem; color: var(--subtle); line-height: 1.6; }
+
+    /* ── CTA ── */
+    .cta-section {
+      max-width: 640px; margin: 0 auto; padding: 4rem 2rem 6rem; text-align: center;
+      border-top: 1px solid var(--border);
+    }
+    .cta-heading {
+      font-family: var(--serif); font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 400; color: var(--strong); line-height: 1.2; margin-bottom: 1rem;
+    }
+    .cta-sub { font-size: 0.9rem; color: var(--subtle); margin-bottom: 2rem; line-height: 1.8; }
+    .cta-btn {
+      display: inline-block; background: var(--strong); color: var(--bg);
+      font-size: 0.82rem; font-weight: 500; letter-spacing: 0.08em;
+      padding: 0.875rem 2rem; transition: opacity 0.2s;
+    }
+    .cta-btn:hover { opacity: 0.85; }
+    .cta-note { margin-top: 1rem; font-size: 0.75rem; color: var(--muted); }
+
+    .demo-badge {
+      position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 200;
+      background: var(--strong); color: var(--bg);
+      font-size: 0.65rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.45rem 1rem;
+    }
+
+    /* ── MOCKUP & WORKFLOW FRAME ── */
+    .mockup-container {
+      max-width: 900px;
+      margin: 0 auto 4rem;
+      padding: 0 1.5rem;
+      text-align: center;
+    }
+    .mockup-img {
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      display: block;
+    }
+    .mockup-caption {
+      margin-top: 1rem;
+      font-size: 0.8rem;
+      color: var(--subtle);
+      line-height: 1.6;
+    }
+
+    .workflow-frame {
+      background: #0f1216;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+      position: relative;
+      margin-bottom: 2rem;
+    }
+    .workflow-img-wrap {
+      position: relative;
+      cursor: zoom-in;
+      overflow: hidden;
+    }
+    .workflow-img {
+      width: 100%;
+      display: block;
+      transition: filter 0.2s ease;
+    }
+    .workflow-img-wrap:hover .workflow-img {
+      filter: brightness(1.03);
+    }
+    .workflow-zoom-hint {
+      position: absolute;
+      bottom: 1rem;
+      right: 1.25rem;
+      background: rgba(12, 12, 12, 0.85);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border);
+      color: var(--strong);
+      font-size: 0.72rem;
+      padding: 0.4rem 0.85rem;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      pointer-events: none;
+    }
+
+    /* ── LIGHTBOX MODAL ── */
+    .lightbox-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(0, 0, 0, 0.92);
+      backdrop-filter: blur(10px);
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      cursor: zoom-out;
+    }
+    .lightbox-modal.active {
+      display: flex;
+    }
+    .lightbox-content {
+      max-width: 96vw;
+      max-height: 92vh;
+      object-fit: contain;
+      border-radius: 6px;
+      box-shadow: 0 20px 80px rgba(0, 0, 0, 0.8);
+      border: 1px solid var(--border);
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 2rem;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      color: var(--strong);
+      font-size: 1.5rem;
+      line-height: 1;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .lightbox-close:hover {
+      background: var(--bg3);
+    }
+
+    @media (max-width: 800px) {
+      nav { padding: 0 1.25rem; }
+      .hero { padding: 100px 1.5rem 60px; }
+      .scenario { padding: 0 1.5rem 3rem; }
+      .mockup-container { margin-bottom: 3rem; padding: 0 1rem; }
+      .comparison-wrap { padding: 0 1rem 4rem; }
+      .comparison-header { grid-template-columns: 1fr 40px 1fr; }
+      .step-row { grid-template-columns: 1fr 40px 1fr; }
+      .step-card { padding: 1rem 1rem; }
+      .step-body { font-size: 0.78rem; }
+      .timeline-bar { grid-template-columns: 1fr; }
+      .result-strip { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-brand">Missed-Call Recovery — Demo</div>
+    <a href="/" class="nav-back">← Back to portfolio</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <p class="hero-label">High-Ticket Revenue Protection</p>
+    <h1>Never lose a customer to a <em>missed phone call</em> again</h1>
+    <p class="hero-sub">
+      For diagnostic labs, clinics, car detailing studios, and real estate: Turn busy lines and after-hours rings into confirmed bookings in under 30 seconds.
+    </p>
+    <p class="hero-scroll">See how it works</p>
+  </section>
+
+  <!-- SCENARIO -->
+  <div class="scenario">
+    <div class="scenario-name">
+      <span></span>
+      Example: Apex Diagnostics & Scan Centre — Jubilee Hills, Hyderabad
+    </div>
+    <p>A customer calls at 8:15 PM to urgently book a Full Body Blood Profile & Thyroid Panel for the following morning. The lab is closed for the day and the receptionist has gone home.</p>
+    <p>Here is how a ₹4,500 patient booking is lost forever vs. how our automated WhatsApp recovery captures it in 2 minutes.</p>
+  </div>
+
+  <!-- VISUAL MOCKUP -->
+  <div class="mockup-container">
+    <img src="/images/missed-call-mockup.jpg" alt="Missed Call to Instant WhatsApp Booking Mockup" class="mockup-img" />
+    <p class="mockup-caption">Live customer journey: Call goes unanswered at 9:41 AM ➔ Instant WhatsApp arrives with interactive in-chat slot booking widget at 9:42 AM.</p>
+  </div>
+
+  <!-- COMPARISON -->
+  <div class="comparison-wrap">
+    <div class="comparison-header">
+      <div class="col-label before">❌ Without Automation</div>
+      <div class="col-divider-top"></div>
+      <div class="col-label after">✅ With Recovery Engine</div>
+    </div>
+
+    <div class="steps" id="steps">
+
+      <div class="step-row">
+        <div class="step-card before-card">
+          <div class="step-num">Step 01</div>
+          <div class="step-icon">📞</div>
+          <div class="step-title red">Phone rings out with no answer</div>
+          <div class="step-body">The customer calls at 8:15 PM. The phone rings 6 times. No voicemail or interactive system. The caller hangs up frustrated.</div>
+          <span class="step-tag pain">Unanswered call</span>
+        </div>
+        <div class="step-divider"><div class="vs">↕</div></div>
+        <div class="step-card after-card">
+          <div class="step-num">Step 01</div>
+          <div class="step-icon">⚡</div>
+          <div class="step-title green">Instant telephony webhook triggers</div>
+          <div class="step-body">Exotel / Twilio detects a call status of 'no-answer' or 'busy' and instantly dispatches an event payload to our n8n automation webhook.</div>
+          <span class="step-tag gain">Event detected in &lt;1 second</span>
+        </div>
+      </div>
+
+      <div class="step-row">
+        <div class="step-card before-card">
+          <div class="step-num">Step 02</div>
+          <div class="step-icon">🔍</div>
+          <div class="step-title red">Customer searches Google for competitor</div>
+          <div class="step-body">Needing tests tomorrow morning, the patient immediately returns to Google Maps and calls the next diagnostic centre down the road.</div>
+          <span class="step-tag pain">Lead immediately lost to competitor</span>
+        </div>
+        <div class="step-divider"><div class="vs">↕</div></div>
+        <div class="step-card after-card">
+          <div class="step-num">Step 02</div>
+          <div class="step-icon">💬</div>
+          <div class="step-title green">WhatsApp apology & booking link in 30s</div>
+          <div class="step-body">Before the caller can search elsewhere, WhatsApp buzzes: "Hi! We missed your call as our desk is closed. You can book tomorrow's test slot or upload your prescription right here on autopilot: [Link]".</div>
+          <span class="step-tag gain">Customer intercepted at 00:30s</span>
+        </div>
+      </div>
+
+      <div class="step-row">
+        <div class="step-card before-card">
+          <div class="step-num">Step 03</div>
+          <div class="step-icon">🤦</div>
+          <div class="step-title red">Staff sees missed call next morning at 9 AM</div>
+          <div class="step-body">Receptionist arrives next morning and redials the number. Patient answers: "Sorry, I already got my blood drawn at Vijaya Diagnostics."</div>
+          <span class="step-tag pain">₹4,500 direct revenue lost</span>
+        </div>
+        <div class="step-divider"><div class="vs">↕</div></div>
+        <div class="step-card after-card">
+          <div class="step-num">Step 03</div>
+          <div class="step-icon">📅</div>
+          <div class="step-title green">Slot self-booked & prescription uploaded</div>
+          <div class="step-body">Patient opens the link, picks 7:30 AM home sample collection, and uploads the doctor's prescription. Cal.com syncs with the lab's calendar.</div>
+          <span class="step-tag gain">Booked autonomously in 2 minutes</span>
+        </div>
+      </div>
+
+      <div class="step-row">
+        <div class="step-card before-card">
+          <div class="step-num">Step 04</div>
+          <div class="step-icon">📉</div>
+          <div class="step-title red">Hundreds of missed calls accumulate weekly</div>
+          <div class="step-body">Busy lines during peak hours and evening calls quietly bleed ₹1,00,000+ in lost monthly patient bills without the owner ever knowing.</div>
+          <span class="step-tag pain">Unseen revenue leak</span>
+        </div>
+        <div class="step-divider"><div class="vs">↕</div></div>
+        <div class="step-card after-card">
+          <div class="step-num">Step 04</div>
+          <div class="step-icon">🛡️</div>
+          <div class="step-title green">100% missed-call safety net & live logs</div>
+          <div class="step-body">Every single missed caller is saved in Google Sheets / CRM with timestamp, recovery status, and booking confirmation. 0 leads slip through.</div>
+          <span class="step-tag gain">Recovers 35–45% of missed callers</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TIMELINE HOOK GRAPHIC -->
+  <section class="timeline-section">
+    <span class="timeline-label">Visual Execution Sequence</span>
+    <h2>The 2-Minute Recovery Timeline</h2>
+    <p class="timeline-desc">
+      How Exotel / Twilio telephony, n8n workflows, WhatsApp Cloud API, and Cal.com work together to turn an unanswered phone ring into a confirmed paying booking.
+    </p>
+
+    <div class="timeline-bar">
+      <div class="timeline-node">
+        <div class="timeline-time">00:00 <span>Timestamp</span></div>
+        <div class="timeline-title">Call Missed / Line Busy</div>
+        <div class="timeline-body">Patient dials Apex Diagnostics at 8:15 PM. Telephony gateway records missed call event.</div>
+        <div class="timeline-snippet">Event: missed_call (CID: +91 98490 XXXXX)</div>
+      </div>
+
+      <div class="timeline-node">
+        <div class="timeline-time">00:30 <span>+30 Seconds</span></div>
+        <div class="timeline-title">Automated WhatsApp Intercept</div>
+        <div class="timeline-body">n8n workflow triggers instant WhatsApp text with direct booking and prescription upload CTA.</div>
+        <div class="timeline-snippet">"Hi! Missed your call. Book test here: [Link]"</div>
+      </div>
+
+      <div class="timeline-node">
+        <div class="timeline-time">02:00 <span>+2 Minutes</span></div>
+        <div class="timeline-title">Slot Confirmed & Phlebotomist Assigned</div>
+        <div class="timeline-body">Patient self-selects 7:30 AM home collection. Calendar synced. WhatsApp sends confirmation card.</div>
+        <div class="timeline-snippet">Status: CONFIRMED · ₹4,500 Retained</div>
+      </div>
+    </div>
+
+    <!-- n8n CANVAS WORKFLOW -->
+    <div style="margin-top: 4rem;">
+      <span class="timeline-label">Engine Architecture</span>
+      <h3 style="font-family: var(--serif); font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 400; color: var(--strong); margin-bottom: 0.75rem;">The Inbound Telephony n8n Pipeline</h3>
+      <p style="font-size: 0.9rem; color: var(--subtle); max-width: 650px; margin: 0 auto 2rem; line-height: 1.7;">
+        The production workflow built in n8n. Twilio telephony trigger, Whisper transcription & AI intent analysis, multi-channel WhatsApp recovery, PDF generator, CRM sync, and automated loop follow-up.
+      </p>
+
+      <div class="workflow-frame">
+        <div class="workflow-img-wrap" id="workflowImgWrap" title="Click to view full screen">
+          <img src="/images/missed-call-n8n-workflow.png" alt="Inbound Calls Lead Processing Multi-Channel Automation n8n Workflow by Devi Sri Prasad" class="workflow-img" />
+          <div class="workflow-zoom-hint">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              <line x1="11" y1="8" x2="11" y2="14"></line>
+              <line x1="8" y1="11" x2="14" y2="11"></line>
+            </svg>
+            Click to expand
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULT STRIP -->
+  <div class="result-strip">
+    <div class="result-card">
+      <div class="result-value">38%</div>
+      <div class="result-label">Average recovery rate<br>of previously lost missed calls</div>
+    </div>
+    <div class="result-card">
+      <div class="result-value">&lt;30s</div>
+      <div class="result-label">Time to WhatsApp intercept<br>before they call a competitor</div>
+    </div>
+    <div class="result-card">
+      <div class="result-value">₹45,000+</div>
+      <div class="result-label">Average monthly revenue saved<br>for high-ticket local businesses</div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <h2 class="cta-heading">Stop losing callers to your competitors</h2>
+    <p class="cta-sub">
+      I set up this automated missed-call recovery system for diagnostic labs, clinics, real estate firms, and detailing studios in Hyderabad and across India. One-time setup. Prices start at ₹2,500.
+    </p>
+    <a href="mailto:nakkadevisriprasad@gmail.com?subject=Missed Call Recovery Automation Enquiry" class="cta-btn">
+      Talk to DSP →
+    </a>
+    <p class="cta-note">Or reach out via WhatsApp / email.</p>
+  </div>
+
+  <div class="demo-badge">Built by DSP</div>
+
+  <!-- LIGHTBOX MODAL -->
+  <div class="lightbox-modal" id="lightbox">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close image">×</button>
+    <img src="/images/missed-call-n8n-workflow.png" alt="n8n Workflow Enlarge" class="lightbox-content" id="lightboxImg" />
+  </div>
+
+  <script>
+    const rows = document.querySelectorAll('.step-row')
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible')
+        }
+      })
+    }, { threshold: 0.15 })
+    rows.forEach(row => observer.observe(row))
+
+    // Lightbox modal toggle
+    const wrap = document.getElementById('workflowImgWrap')
+    const modal = document.getElementById('lightbox')
+    const closeBtn = document.getElementById('lightboxClose')
+
+    if (wrap && modal) {
+      wrap.addEventListener('click', () => modal.classList.add('active'))
+      modal.addEventListener('click', (e) => {
+        if (e.target !== document.getElementById('lightboxImg')) {
+          modal.classList.remove('active')
+        }
+      })
+      if (closeBtn) {
+        closeBtn.addEventListener('click', () => modal.classList.remove('active'))
+      }
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') modal.classList.remove('active')
+      })
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,871 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Celestia — Ultra-Luxury Sky Mansions · Kokapet, Hyderabad</title>
+  <meta name="description" content="Hyderabad's most exclusive 4 & 5 BHK Sky Villas. Located in Neopolis, Kokapet. Prices from ₹8.2 Cr." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0b0d11;
+      --bg-surface: #12161f;
+      --bg-card: #181d27;
+      --border: #232a39;
+      --bronze: #c59b6d;
+      --bronze-light: #e6c8a5;
+      --bronze-dim: rgba(197, 155, 109, 0.12);
+      --text: #e2e8f0;
+      --text-muted: #8e9bb0;
+      --text-dim: #5c687e;
+      --font-serif: 'Cinzel', serif;
+      --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+    }
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    ::selection { background: var(--bronze); color: #000; }
+
+    /* ── HEADER ── */
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(11, 13, 17, 0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 3.5rem;
+      height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .brand {
+      display: flex;
+      flex-direction: column;
+    }
+    .brand-title {
+      font-family: var(--font-serif);
+      font-size: 1.55rem;
+      letter-spacing: 0.18em;
+      color: var(--bronze-light);
+      font-weight: 500;
+      line-height: 1;
+    }
+    .brand-loc {
+      font-size: 0.62rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-top: 4px;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.2rem;
+    }
+    .nav-links a {
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--bronze-light); }
+    .nav-btn {
+      background: linear-gradient(135deg, var(--bronze), #a37849);
+      color: #0b0d11;
+      font-weight: 600;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.65rem 1.4rem;
+      border-radius: 2px;
+      transition: all 0.2s;
+    }
+    .nav-btn:hover { opacity: 0.92; transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6rem 2rem;
+      background: radial-gradient(circle at center, rgba(197, 155, 109, 0.08) 0%, transparent 70%);
+      text-align: center;
+    }
+    .hero-content {
+      max-width: 960px;
+      z-index: 2;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bronze-dim);
+      border: 1px solid rgba(197, 155, 109, 0.3);
+      padding: 6px 18px;
+      border-radius: 40px;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--bronze-light);
+      margin-bottom: 2rem;
+    }
+    .hero h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(2.6rem, 5.5vw, 4.8rem);
+      font-weight: 400;
+      line-height: 1.1;
+      color: #fff;
+      letter-spacing: 0.04em;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 span {
+      display: block;
+      color: var(--bronze-light);
+      font-size: 0.9em;
+    }
+    .hero p {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 660px;
+      margin: 0 auto 3rem;
+      line-height: 1.8;
+    }
+    .hero-ctas {
+      display: flex;
+      justify-content: center;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+    }
+    .btn-bronze {
+      background: linear-gradient(135deg, var(--bronze), #a37849);
+      color: #0b0d11;
+      font-weight: 600;
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 1rem 2.2rem;
+      border-radius: 2px;
+      transition: all 0.2s;
+    }
+    .btn-bronze:hover { opacity: 0.92; transform: translateY(-1px); }
+    .btn-outline {
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 1rem 2rem;
+      border-radius: 2px;
+      background: rgba(255, 255, 255, 0.02);
+      transition: all 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--bronze); color: var(--bronze-light); }
+
+    /* ── PROPERTY STATS BAR ── */
+    .stats-bar {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-surface);
+      padding: 2.25rem 3.5rem;
+    }
+    .stats-grid {
+      max-width: 1360px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      text-align: center;
+    }
+    .stat-item strong {
+      font-family: var(--font-serif);
+      font-size: 2.3rem;
+      color: var(--bronze-light);
+      display: block;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat-item span {
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* ── GALLERY SHOWCASE ── */
+    .section {
+      padding: 7rem 3.5rem;
+      max-width: 1360px;
+      margin: 0 auto;
+    }
+    .section-head {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 4rem;
+    }
+    .section-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--bronze);
+      display: inline-block;
+      margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.2rem, 4.2vw, 3.2rem);
+      font-weight: 400;
+      color: #fff;
+      line-height: 1.15;
+      letter-spacing: 0.02em;
+      margin-bottom: 1rem;
+    }
+    .section-desc {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      grid-template-rows: 290px 290px;
+      gap: 1.5rem;
+    }
+    .gallery-item {
+      position: relative;
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .gallery-item.span-2 {
+      grid-row: span 2;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.9);
+      transition: transform 0.6s ease;
+    }
+    .gallery-item:hover img { transform: scale(1.03); }
+    .gallery-caption {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: linear-gradient(to top, rgba(11, 13, 17, 0.95), transparent);
+      padding: 2rem 1.5rem 1.25rem;
+    }
+    .gallery-caption h4 {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      color: #fff;
+      font-weight: 400;
+    }
+    .gallery-caption p {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+
+    /* ── FLOOR PLANS (INTERACTIVE) ── */
+    .plans-container {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 3rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3.5rem;
+      align-items: center;
+    }
+    .plans-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .plan-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 1.15rem 1.5rem;
+      border-radius: 4px;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .plan-btn strong {
+      display: block;
+      font-size: 1rem;
+      color: #fff;
+      font-family: var(--font-serif);
+    }
+    .plan-btn span {
+      font-size: 0.78rem;
+      color: var(--text-dim);
+    }
+    .plan-btn.active {
+      border-color: var(--bronze);
+      background: var(--bronze-dim);
+    }
+    .plan-btn.active strong { color: var(--bronze-light); }
+
+    .plan-specs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .spec-box {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 0.85rem 1rem;
+      border-radius: 3px;
+    }
+    .spec-box span { font-size: 0.72rem; color: var(--text-dim); text-transform: uppercase; }
+    .spec-box strong { display: block; font-size: 1rem; color: #fff; margin-top: 2px; }
+
+    .plan-visual-wrap {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.5rem;
+      text-align: center;
+    }
+    .plan-visual-wrap img {
+      width: 100%;
+      height: 380px;
+      object-fit: contain;
+      filter: invert(1) contrast(0.85) opacity(0.85);
+    }
+
+    /* ── AMENITIES ── */
+    .amenities-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .amenity-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 2.25rem 2rem;
+      border-radius: 4px;
+      transition: all 0.3s;
+    }
+    .amenity-card:hover {
+      border-color: rgba(197, 155, 109, 0.4);
+      transform: translateY(-3px);
+    }
+    .amenity-num {
+      font-family: var(--font-serif);
+      font-size: 1.4rem;
+      color: var(--bronze);
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .amenity-card h3 {
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      color: #fff;
+      font-weight: 400;
+      margin-bottom: 0.65rem;
+    }
+    .amenity-card p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ── VIP SITE TOUR FORM ── */
+    .tour-section {
+      background: linear-gradient(180deg, var(--bg-surface) 0%, var(--bg) 100%);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 7rem 3.5rem;
+    }
+    .tour-box {
+      max-width: 860px;
+      margin: 0 auto;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 3.5rem;
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.6);
+    }
+    .tour-header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+    .tour-header h2 {
+      font-family: var(--font-serif);
+      font-size: 2.4rem;
+      color: #fff;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+    }
+    .tour-header p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+    .tour-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .form-full { grid-column: span 2; }
+    .form-group label {
+      display: block;
+      font-size: 0.74rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+    .form-input, .form-select {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: 0.85rem 1rem;
+      color: #fff;
+      font-family: var(--font-sans);
+      font-size: 0.88rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-input:focus, .form-select:focus {
+      border-color: var(--bronze);
+    }
+    .btn-submit {
+      width: 100%;
+      background: linear-gradient(135deg, var(--bronze), #a37849);
+      color: #0b0d11;
+      font-weight: 600;
+      font-size: 0.88rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 1.05rem;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      margin-top: 0.5rem;
+    }
+    .btn-submit:hover { opacity: 0.92; }
+
+    .tour-success {
+      display: none;
+      text-align: center;
+      padding: 2rem 0;
+    }
+    .success-icon {
+      width: 60px;
+      height: 60px;
+      background: var(--bronze-dim);
+      border: 1px solid var(--bronze);
+      border-radius: 50%;
+      color: var(--bronze-light);
+      font-size: 1.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.25rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 4rem 3.5rem 2rem;
+      max-width: 1360px;
+      margin: 0 auto;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      font-size: 0.8rem;
+      color: var(--text-dim);
+    }
+
+    .demo-watermark {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 200;
+      background: rgba(11, 13, 17, 0.9);
+      border: 1px solid var(--bronze);
+      color: var(--bronze-light);
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.5rem 1rem;
+      border-radius: 2px;
+      backdrop-filter: blur(10px);
+    }
+
+    @media (max-width: 900px) {
+      header, .stats-bar, .section, .tour-section, footer { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .nav-links { display: none; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+      .gallery-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
+      .gallery-item.span-2 { grid-row: auto; height: 320px; }
+      .plans-container { grid-template-columns: 1fr; gap: 2rem; }
+      .amenities-grid { grid-template-columns: 1fr; }
+      .tour-form { grid-template-columns: 1fr; }
+      .form-full { grid-column: span 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="brand">
+      <span class="brand-title">THE CELESTIA</span>
+      <span class="brand-loc">Neopolis · Kokapet, Hyderabad</span>
+    </div>
+
+    <div class="nav-links">
+      <a href="#gallery">Residences</a>
+      <a href="#plans">Floor Plans</a>
+      <a href="#amenities">Amenities</a>
+      <a href="#tour" class="nav-btn">Schedule Private Visit</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">Ultra-Luxury Sky Mansions · Limited to 48 Units</div>
+      <h1>
+        Elevated living for
+        <span>Hyderabad's visionaries</span>
+      </h1>
+      <p>
+        4 & 5 BHK bespoke sky estates perched above Neopolis, Kokapet. 14-foot acoustic glass, cantilevered private infinity pools, and uninterrupted skyline vistas.
+      </p>
+      <div class="hero-ctas">
+        <a href="#tour" class="btn-bronze">Book Private Preview</a>
+        <a href="#plans" class="btn-outline">View Floor Plans ↓</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS STRIP -->
+  <div class="stats-bar">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <strong>₹8.2 Cr</strong>
+        <span>Starting Price</span>
+      </div>
+      <div class="stat-item">
+        <strong>5,800 – 9,200</strong>
+        <span>Square Feet (RERA Carpet)</span>
+      </div>
+      <div class="stat-item">
+        <strong>14 Ft.</strong>
+        <span>Clear Floor-To-Ceiling Height</span>
+      </div>
+      <div class="stat-item">
+        <strong>Q4 2027</strong>
+        <span>Handover Timeline</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ARCHITECTURAL SHOWCASE -->
+  <section class="section" id="gallery">
+    <div class="section-head">
+      <span class="section-label">Architectural Mastery</span>
+      <h2 class="section-title">Designed for Unrivaled Grandeur</h2>
+      <p class="section-desc">Conceived by world-renowned architectural studios with biophilic private decks and Italian marble finishes throughout.</p>
+    </div>
+
+    <div class="gallery-grid">
+      <div class="gallery-item span-2">
+        <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80" alt="The Celestia Sky Mansion Exterior" />
+        <div class="gallery-caption">
+          <h4>The Grand Sky Terraces</h4>
+          <p>Every residence features a 60-foot wraparound cantilevered deck overlooking Osman Sagar lake.</p>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80" alt="Double Height Living Room" />
+        <div class="gallery-caption">
+          <h4>Double-Height Living Salon</h4>
+          <p>Imported Statuario marble with German motorized curtain automation.</p>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80" alt="Private Infinity Pool" />
+        <div class="gallery-caption">
+          <h4>Heated Infinity Plunge Pool</h4>
+          <p>Private ozone-filtered temperature-regulated plunge pool on high-tier penthouses.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERACTIVE FLOOR PLANS -->
+  <section class="section" id="plans" style="background: var(--bg-surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <div class="section-head">
+      <span class="section-label">Space & Dimensions</span>
+      <h2 class="section-title">Interactive Floor Plans</h2>
+      <p class="section-desc">Explore our three ultra-spacious configurations crafted with separate staff quarters and private elevator foyers.</p>
+    </div>
+
+    <div class="plans-container">
+      <div>
+        <div class="plans-nav">
+          <div class="plan-btn active" onclick="selectPlan('planA', this)">
+            <div>
+              <strong>4 BHK The Regal Sky Suite</strong>
+              <span>5,850 Sq.Ft · Single Level</span>
+            </div>
+            <span style="color: var(--bronze-light);">₹8.2 Cr*</span>
+          </div>
+
+          <div class="plan-btn" onclick="selectPlan('planB', this)">
+            <div>
+              <strong>5 BHK The Imperial Duplex</strong>
+              <span>7,400 Sq.Ft · Two Levels</span>
+            </div>
+            <span style="color: var(--bronze-light);">₹11.5 Cr*</span>
+          </div>
+
+          <div class="plan-btn" onclick="selectPlan('planC', this)">
+            <div>
+              <strong>The Presidential Penthouse</strong>
+              <span>9,200 Sq.Ft · Private Rooftop Deck</span>
+            </div>
+            <span style="color: var(--bronze-light);">₹16.8 Cr*</span>
+          </div>
+        </div>
+
+        <div class="plan-specs" id="specsDisplay">
+          <div class="spec-box">
+            <span>Carpet Area</span>
+            <strong id="specArea">5,850 Sq.Ft.</strong>
+          </div>
+          <div class="spec-box">
+            <span>Elevators</span>
+            <strong id="specLift">Private Keycard Access</strong>
+          </div>
+          <div class="spec-box">
+            <span>Bedrooms</span>
+            <strong id="specBed">4 Suites + Maid Quarters</strong>
+          </div>
+          <div class="spec-box">
+            <span>Parking</span>
+            <strong id="specPark">4 Dedicated EV Bays</strong>
+          </div>
+        </div>
+
+        <a href="#tour" class="btn-bronze" style="display: inline-block;">Download Architectural Blueprint PDF</a>
+      </div>
+
+      <div class="plan-visual-wrap">
+        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80" id="planImg" alt="Architectural Plan Blueprint" />
+        <p id="planNote" style="font-size: 0.78rem; color: var(--text-dim); margin-top: 1rem;">Architectural rendering · 4 BHK The Regal Sky Suite Layout</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- AMENITIES -->
+  <section class="section" id="amenities">
+    <div class="section-head">
+      <span class="section-label">Clubhouse & Lifestyle</span>
+      <h2 class="section-title">The Celestia Club: 50,000 Sq.Ft.</h2>
+      <p class="section-desc">World-class privileges managed by five-star hospitality concierges, available exclusively to residents.</p>
+    </div>
+
+    <div class="amenities-grid">
+      <div class="amenity-card">
+        <span class="amenity-num">01</span>
+        <h3>Rooftop Helipad & Sky Lounge</h3>
+        <p>Private chartered air-taxi pick-up privileges and an elevated 360-degree lounge overlooking Osman Sagar.</p>
+      </div>
+
+      <div class="amenity-card">
+        <span class="amenity-num">02</span>
+        <h3>Sommelier & Private Wine Cellar</h3>
+        <p>Climate-monitored private wine tasting vault with sommelier services for private hosting.</p>
+      </div>
+
+      <div class="amenity-card">
+        <span class="amenity-num">03</span>
+        <h3>Biometric EV Vaults</h3>
+        <p>Four air-conditioned private subterranean parking bays per residence with 22kW ultra-fast charging.</p>
+      </div>
+
+      <div class="amenity-card">
+        <span class="amenity-num">04</span>
+        <h3>Ozone Heated Lap Pool</h3>
+        <p>50-meter Olympic-dimension indoor heated pool with zero-chemical chlorine-free ozone water sanitization.</p>
+      </div>
+
+      <div class="amenity-card">
+        <span class="amenity-num">05</span>
+        <h3>Screening Room & Cigar Lounge</h3>
+        <p>Dolby Atmos 24-seater acoustically tuned private theatre with custom leather recliner seating.</p>
+      </div>
+
+      <div class="amenity-card">
+        <span class="amenity-num">06</span>
+        <h3>24/7 White-Glove Concierge</h3>
+        <p>Dedicated round-the-clock butler desk, grocery management, and valet services on call.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIP TOUR BOOKING -->
+  <section class="tour-section" id="tour">
+    <div class="tour-box">
+      <div class="tour-header">
+        <span class="section-label">Exclusive Access</span>
+        <h2>Schedule a Private Model Suite Tour</h2>
+        <p>Walk through our fully furnished experience center in Neopolis, Kokapet with our Lead Portfolio Director.</p>
+      </div>
+
+      <form id="tourForm" class="tour-form" onsubmit="handleTourBooking(event)">
+        <div class="form-group">
+          <label for="cName">Full Name</label>
+          <input type="text" id="cName" class="form-input" placeholder="e.g. Anand K. Varma" required />
+        </div>
+
+        <div class="form-group">
+          <label for="cPhone">Phone Number</label>
+          <input type="tel" id="cPhone" class="form-input" placeholder="+91 98490 XXXXX" required />
+        </div>
+
+        <div class="form-group">
+          <label for="cUnit">Configuration of Interest</label>
+          <select id="cUnit" class="form-select" required>
+            <option value="4 BHK Regal Sky Suite (₹8.2 Cr+)">4 BHK Regal Sky Suite (5,850 Sq.Ft · ₹8.2 Cr+)</option>
+            <option value="5 BHK Imperial Duplex (₹11.5 Cr+)">5 BHK Imperial Duplex (7,400 Sq.Ft · ₹11.5 Cr+)</option>
+            <option value="The Presidential Penthouse (₹16.8 Cr+)">The Presidential Penthouse (9,200 Sq.Ft · ₹16.8 Cr+)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="cDate">Preferred Preview Date</label>
+          <input type="date" id="cDate" class="form-input" required />
+        </div>
+
+        <div class="form-group form-full">
+          <label for="cNotes">Special Requests (Optional)</label>
+          <input type="text" id="cNotes" class="form-input" placeholder="e.g. Require Chauffeur service from Jubilee Hills" />
+        </div>
+
+        <div class="form-group form-full">
+          <button type="submit" class="btn-submit">Request Private Presentation</button>
+        </div>
+      </form>
+
+      <div id="tourSuccess" class="tour-success">
+        <div class="success-icon">✓</div>
+        <h3 style="font-family: var(--font-serif); font-size: 2rem; color: #fff; margin-bottom: 0.5rem;">Private Preview Requested</h3>
+        <p style="color: var(--text-muted); font-size: 0.92rem; max-width: 500px; margin: 0 auto 1.5rem;">
+          Thank you, <strong id="vName" style="color: #fff;"></strong>. Our Senior Relationship Director will contact you within 2 business hours with confidential pricing dossiers and your private access pass.
+        </p>
+        <button onclick="resetTour()" class="btn-outline" style="cursor: pointer;">Submit Another Inquiry</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div>
+      <strong style="color: #fff; font-size: 1rem; letter-spacing: 0.12em; font-family: var(--font-serif);">THE CELESTIA HYDERABAD</strong>
+      <p style="margin-top: 4px;">Sector 1, Neopolis Layout, Kokapet, Hyderabad, Telangana 500075 · RERA: P02400008912</p>
+    </div>
+    <div style="text-align: right;">
+      <span>© 2026 The Celestia Luxury Residences. All rights reserved.</span>
+      <p style="margin-top: 4px; color: var(--bronze-light);">High-Conversion Luxury Real Estate Experience</p>
+    </div>
+  </footer>
+
+  <div class="demo-watermark">Demo by DSP</div>
+
+  <script>
+    const plansData = {
+      planA: {
+        area: "5,850 Sq.Ft.",
+        lift: "Private Keycard Access",
+        bed: "4 Suites + Maid Quarters",
+        park: "4 Dedicated EV Bays",
+        note: "Architectural rendering · 4 BHK The Regal Sky Suite Layout"
+      },
+      planB: {
+        area: "7,400 Sq.Ft.",
+        lift: "Dual High-Speed Private Elevators",
+        bed: "5 Suites + 2 Maid Quarters",
+        park: "5 Dedicated EV Bays",
+        note: "Architectural rendering · 5 BHK The Imperial Duplex Layout"
+      },
+      planC: {
+        area: "9,200 Sq.Ft.",
+        lift: "Express Rooftop Access Lift",
+        bed: "5 Master Suites + Private Studio",
+        park: "6 Dedicated EV Bays + Helipad",
+        note: "Architectural rendering · The Presidential Penthouse with Private Plunge Pool"
+      }
+    }
+
+    function selectPlan(key, btn) {
+      document.querySelectorAll('.plan-btn').forEach(b => b.classList.remove('active'))
+      btn.classList.add('active')
+
+      const d = plansData[key]
+      document.getElementById('specArea').textContent = d.area
+      document.getElementById('specLift').textContent = d.lift
+      document.getElementById('specBed').textContent = d.bed
+      document.getElementById('specPark').textContent = d.park
+      document.getElementById('planNote').textContent = d.note
+    }
+
+    const cDate = document.getElementById('cDate')
+    if (cDate) {
+      const today = new Date().toISOString().split('T')[0]
+      cDate.min = today
+      cDate.value = today
+    }
+
+    function handleTourBooking(e) {
+      e.preventDefault()
+      const name = document.getElementById('cName').value
+      document.getElementById('vName').textContent = name
+      document.getElementById('tourForm').style.display = 'none'
+      document.getElementById('tourSuccess').style.display = 'block'
+    }
+
+    function resetTour() {
+      document.getElementById('tourForm').reset()
+      document.getElementById('tourForm').style.display = 'grid'
+      document.getElementById('tourSuccess').style.display = 'none'
+    }
+  </script>
+
+</body>
+</html>

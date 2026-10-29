@@ -1,0 +1,945 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apex Automations — Real-Time Production AI Engine</title>
+  <meta name="description" content="Production-grade event-driven AI workflow automation console built by Devi Sri Prasad (DSP). Live payload simulation, agent function calling, and real-time state sync." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #090b0e;
+      --surface: #10141b;
+      --surface-2: #161b24;
+      --surface-3: #1d2330;
+      --border: #222938;
+      --border-accent: #2e384d;
+      --text: #e2e8f0;
+      --text-muted: #64748b;
+      --text-dim: #94a3b8;
+      --primary: #38bdf8;
+      --primary-dim: rgba(56, 189, 248, 0.12);
+      --green: #10b981;
+      --green-dim: rgba(16, 185, 129, 0.12);
+      --amber: #f59e0b;
+      --amber-dim: rgba(245, 158, 11, 0.12);
+      --purple: #a855f7;
+      --purple-dim: rgba(168, 85, 247, 0.12);
+      --red: #f43f5e;
+      --font-sans: 'Inter', system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: rgba(16, 20, 27, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0.85rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .brand-icon {
+      width: 28px;
+      height: 28px;
+      background: linear-gradient(135deg, var(--primary), var(--purple));
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: #fff;
+    }
+    .brand-title {
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: -0.01em;
+    }
+    .brand-subtitle {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin-left: 6px;
+      padding-left: 8px;
+      border-left: 1px solid var(--border);
+    }
+
+    .telemetry-strip {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .tele-stat {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 8px var(--green);
+      animation: pulse 2s infinite ease-in-out;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    .nav-back {
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      padding: 0.4rem 0.85rem;
+      border-radius: 4px;
+      transition: all 0.2s;
+    }
+    .nav-back:hover {
+      border-color: var(--text-muted);
+      color: var(--text);
+      background: var(--surface-2);
+    }
+
+    /* ── HERO BANNER ── */
+    .hero-banner {
+      padding: 2.5rem 2rem 1.75rem;
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .badge-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--primary-dim);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      color: var(--primary);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 4px;
+      margin-bottom: 0.75rem;
+    }
+    .hero-banner h1 {
+      font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+    .hero-banner p {
+      color: var(--text-dim);
+      font-size: 0.95rem;
+      max-width: 780px;
+      line-height: 1.6;
+    }
+
+    /* ── MAIN CONSOLE GRID ── */
+    .console-grid {
+      display: grid;
+      grid-template-columns: 340px 1fr 340px;
+      gap: 1.5rem;
+      max-width: 1400px;
+      margin: 0 auto 3rem;
+      padding: 0 2rem;
+      width: 100%;
+      flex: 1;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .card-header {
+      padding: 0.85rem 1.25rem;
+      background: var(--surface-2);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .card-title {
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card-badge {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      padding: 2px 6px;
+      border-radius: 3px;
+      background: var(--surface-3);
+      color: var(--text-muted);
+    }
+
+    /* ── LEFT PANEL: EVENT DISPATCHER ── */
+    .panel-body {
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      flex: 1;
+    }
+    .preset-label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+    .preset-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .preset-btn {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.75rem 0.9rem;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.2s;
+      line-height: 1.4;
+    }
+    .preset-btn:hover {
+      border-color: var(--primary);
+      background: var(--surface-3);
+    }
+    .preset-btn.active {
+      border-color: var(--primary);
+      background: var(--primary-dim);
+      color: var(--primary);
+      font-weight: 500;
+    }
+    .preset-btn small {
+      display: block;
+      color: var(--text-muted);
+      font-size: 0.68rem;
+      margin-top: 3px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+    textarea.custom-payload {
+      width: 100%;
+      height: 90px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.75rem;
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      resize: vertical;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    textarea.custom-payload:focus {
+      border-color: var(--primary);
+    }
+
+    .dispatch-btn {
+      background: linear-gradient(135deg, var(--primary), #0284c7);
+      color: #0b1320;
+      border: none;
+      padding: 0.85rem;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.82rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: transform 0.15s, opacity 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 16px rgba(56, 189, 248, 0.25);
+    }
+    .dispatch-btn:hover {
+      opacity: 0.95;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(56, 189, 248, 0.35);
+    }
+    .dispatch-btn:active {
+      transform: translateY(0);
+    }
+    .dispatch-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* ── CENTER PANEL: VISUAL PIPELINE & TELEMETRY ── */
+    .pipeline-visual {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      padding: 1rem 1.25rem;
+      background: var(--surface-2);
+      border-bottom: 1px solid var(--border);
+    }
+    .node-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.65rem 0.5rem;
+      text-align: center;
+      position: relative;
+      transition: all 0.3s;
+    }
+    .node-item.active {
+      border-color: var(--primary);
+      box-shadow: 0 0 14px rgba(56, 189, 248, 0.35);
+      background: var(--surface-3);
+    }
+    .node-item.complete {
+      border-color: var(--green);
+      background: var(--green-dim);
+    }
+    .node-icon {
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+    }
+    .node-title {
+      font-size: 0.68rem;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .node-status {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+    .node-item.complete .node-status {
+      color: var(--green);
+      font-weight: 500;
+    }
+    .node-item.active .node-status {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    /* Telemetry log terminal */
+    .terminal-body {
+      background: #06080b;
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      padding: 1.25rem;
+      flex: 1;
+      overflow-y: auto;
+      max-height: 480px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      line-height: 1.6;
+    }
+    .log-line {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      opacity: 0;
+      transform: translateY(6px);
+      animation: fadeIn 0.25s forwards ease;
+    }
+    @keyframes fadeIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .log-time {
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+    .log-tag {
+      padding: 1px 6px;
+      border-radius: 3px;
+      font-size: 0.65rem;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+    .tag-webhook { background: rgba(56, 189, 248, 0.2); color: var(--primary); }
+    .tag-agent { background: rgba(168, 85, 247, 0.2); color: var(--purple); }
+    .tag-tool { background: rgba(245, 158, 11, 0.2); color: var(--amber); }
+    .tag-db { background: rgba(16, 185, 129, 0.2); color: var(--green); }
+    .tag-out { background: rgba(244, 63, 94, 0.2); color: var(--red); }
+    .log-content {
+      color: var(--text);
+      word-break: break-word;
+    }
+    .log-json {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 6px 10px;
+      margin-top: 4px;
+      color: #93c5fd;
+      font-size: 0.68rem;
+      overflow-x: auto;
+    }
+
+    /* ── RIGHT PANEL: STATE & DB INSPECTOR ── */
+    .state-section {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .state-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.85rem;
+    }
+    .state-title {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .state-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.78rem;
+      padding: 4px 0;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.05);
+    }
+    .state-row:last-child {
+      border-bottom: none;
+    }
+    .state-key {
+      color: var(--text-muted);
+    }
+    .state-val {
+      font-family: var(--font-mono);
+      color: var(--text);
+      font-weight: 500;
+    }
+    .state-val.highlight {
+      color: var(--green);
+    }
+
+    .metrics-summary {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .metric-box {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.75rem;
+      text-align: center;
+    }
+    .metric-num {
+      font-family: var(--font-mono);
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 2px;
+    }
+    .metric-label {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── FOOTER CALLOUT ── */
+    .bottom-cta {
+      max-width: 1400px;
+      margin: 0 auto 3rem;
+      padding: 0 2rem;
+      width: 100%;
+    }
+    .cta-box {
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.08), rgba(168, 85, 247, 0.06));
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 8px;
+      padding: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .cta-text h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+    .cta-text p {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      max-width: 600px;
+    }
+    .cta-button-group {
+      display: flex;
+      gap: 12px;
+    }
+    .btn-contact {
+      background: var(--text);
+      color: var(--bg);
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 0.75rem 1.5rem;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .btn-contact:hover {
+      opacity: 0.9;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1100px) {
+      .console-grid {
+        grid-template-columns: 1fr;
+      }
+      .pipeline-visual {
+        grid-template-columns: repeat(5, minmax(100px, 1fr));
+        overflow-x: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="brand-wrap">
+      <div class="brand-icon">⚡</div>
+      <div>
+        <span class="brand-title">Apex Engine</span>
+        <span class="brand-subtitle">Production AI Automation Console</span>
+      </div>
+    </div>
+
+    <div class="telemetry-strip">
+      <div class="tele-stat">
+        <span class="live-dot"></span>
+        <span>PRODUCTION ACTIVE</span>
+      </div>
+      <div class="tele-stat" style="display: none; @media(min-width: 768px){display:flex;}">
+        <span>LATENCY: <strong>38ms</strong></span>
+      </div>
+      <a href="/" class="nav-back">← Portfolio</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero-banner">
+    <span class="badge-tag">Interactive Enterprise Simulation</span>
+    <h1>Real-Time Autonomous Agent & Workflow Console</h1>
+    <p>
+      An event-driven orchestration system built by Devi Sri Prasad. Simulate an inbound customer payload to inspect live webhook validation, LLM function calling, calendar tool execution, and CRM state synchronization in real time.
+    </p>
+  </section>
+
+  <!-- CONSOLE GRID -->
+  <main class="console-grid">
+
+    <!-- LEFT: EVENT DISPATCHER -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title"><span>📡</span> Inbound Ingestion</span>
+        <span class="card-badge">WEBHOOK V1</span>
+      </div>
+      <div class="panel-body">
+        <div>
+          <div class="preset-label">Choose Production Scenario</div>
+          <div class="preset-buttons">
+            <button class="preset-btn active" onclick="selectPreset(0)">
+              <strong>Dr. Sharma Skin Consultation</strong>
+              <small>WhatsApp inquiry: Acne treatment & slot check</small>
+            </button>
+            <button class="preset-btn" onclick="selectPreset(1)">
+              <strong>HydraFacial Evening Slot</strong>
+              <small>Urgent evening booking request</small>
+            </button>
+            <button class="preset-btn" onclick="selectPreset(2)">
+              <strong>Follow-up Reschedule</strong>
+              <small>Existing patient slot modification</small>
+            </button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Payload (Customer WhatsApp Message)</label>
+          <textarea id="payloadInput" class="custom-payload">"Hey, need an appointment with Dr. Sharma for acne treatment tomorrow around 4 PM. Is a slot available?"</textarea>
+        </div>
+
+        <button id="dispatchBtn" class="dispatch-btn" onclick="runPipeline()">
+          <span>⚡ Dispatch Live Webhook</span>
+        </button>
+
+        <div style="font-size: 0.7rem; color: var(--text-muted); line-height: 1.5;">
+          🔒 Signed with HMAC-SHA256. Webhook payload will execute through real agent logic and update telemetry below.
+        </div>
+      </div>
+    </div>
+
+    <!-- CENTER: VISUAL PIPELINE & TELEMETRY -->
+    <div class="card" style="min-height: 540px;">
+      <div class="card-header">
+        <span class="card-title"><span>⚙️</span> Execution Pipeline & Telemetry</span>
+        <span class="card-badge" id="executionTimer">READY · 0.00s</span>
+      </div>
+
+      <!-- Node Flow Strip -->
+      <div class="pipeline-visual">
+        <div class="node-item" id="node-0">
+          <div class="node-icon">📥</div>
+          <div class="node-title">Webhook</div>
+          <div class="node-status">LISTENING</div>
+        </div>
+        <div class="node-item" id="node-1">
+          <div class="node-icon">🧠</div>
+          <div class="node-title">AI Intent</div>
+          <div class="node-status">STANDBY</div>
+        </div>
+        <div class="node-item" id="node-2">
+          <div class="node-icon">📅</div>
+          <div class="node-title">Calendar Tool</div>
+          <div class="node-status">STANDBY</div>
+        </div>
+        <div class="node-item" id="node-3">
+          <div class="node-icon">💾</div>
+          <div class="node-title">Database Sync</div>
+          <div class="node-status">STANDBY</div>
+        </div>
+        <div class="node-item" id="node-4">
+          <div class="node-icon">💬</div>
+          <div class="node-title">WhatsApp API</div>
+          <div class="node-status">STANDBY</div>
+        </div>
+      </div>
+
+      <!-- Live Terminal Output -->
+      <div class="terminal-body" id="terminal">
+        <div class="log-line">
+          <span class="log-time">14:28:00.104</span>
+          <span class="log-tag tag-webhook">SYSTEM</span>
+          <span class="log-content">Apex Engine initialized. Microservice listeners active on port 8080.</span>
+        </div>
+        <div class="log-line">
+          <span class="log-time">14:28:00.120</span>
+          <span class="log-tag tag-db">HEALTH</span>
+          <span class="log-content">PostgreSQL connection pool healthy (12 active, 0 idle timeout).</span>
+        </div>
+        <div class="log-line">
+          <span class="log-time">14:28:00.145</span>
+          <span class="log-tag tag-agent">AGENT</span>
+          <span class="log-content">OpenAI / Claude function calling interface authenticated with rate limit 10,000 RPM.</span>
+        </div>
+        <div class="log-line" style="color: var(--primary);">
+          <span class="log-time">14:28:00.200</span>
+          <span class="log-tag tag-webhook">READY</span>
+          <span class="log-content">Select a scenario on the left and click "Dispatch Live Webhook" to trigger execution.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: STATE & DATABASE INSPECTOR -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title"><span>📊</span> Live DB State</span>
+        <span class="card-badge">POSTGRESQL</span>
+      </div>
+      <div class="panel-body">
+
+        <div class="state-section">
+          <div class="state-card">
+            <div class="state-title">
+              <span>Patient / Lead Entity</span>
+              <span id="recordStatus" style="color: var(--amber);">WAITING</span>
+            </div>
+            <div class="state-row">
+              <span class="state-key">Record ID:</span>
+              <span class="state-val" id="recId">usr_892ba10</span>
+            </div>
+            <div class="state-row">
+              <span class="state-key">Treatment:</span>
+              <span class="state-val" id="recService">Dr. Sharma Consultation</span>
+            </div>
+            <div class="state-row">
+              <span class="state-key">Slot Booked:</span>
+              <span class="state-val highlight" id="recSlot">Pending confirmation</span>
+            </div>
+            <div class="state-row">
+              <span class="state-key">WhatsApp Dispatch:</span>
+              <span class="state-val" id="recWa">Idle</span>
+            </div>
+          </div>
+
+          <div class="state-card">
+            <div class="state-title">
+              <span>Queue & Metrics</span>
+              <span style="color: var(--green);">99.99% HEALTH</span>
+            </div>
+            <div class="metrics-summary">
+              <div class="metric-box">
+                <div class="metric-num" id="latencyStat">-- ms</div>
+                <div class="metric-label">End-to-End</div>
+              </div>
+              <div class="metric-box">
+                <div class="metric-num" id="tokensStat">--</div>
+                <div class="metric-label">Tokens Used</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="font-size: 0.72rem; color: var(--text-dim); background: var(--surface-2); padding: 0.75rem; border-radius: 6px; border: 1px solid var(--border);">
+            <strong style="color: var(--text);">Engine Specs:</strong>
+            <ul style="padding-left: 1.2rem; margin-top: 4px; line-height: 1.6;">
+              <li>Zero human intervention</li>
+              <li>Dual-retry dead letter queue</li>
+              <li>Direct WhatsApp Cloud API sync</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- BOTTOM CALLOUT -->
+  <section class="bottom-cta">
+    <div class="cta-box">
+      <div class="cta-text">
+        <h3>Need production AI automations for your company?</h3>
+        <p>I build custom event-driven pipelines, AI voice/chat agents, and CRM sync engines that eliminate hours of manual operational overhead every week.</p>
+      </div>
+      <div class="cta-button-group">
+        <a href="mailto:nakkadevisriprasad@gmail.com?subject=Production AI Automation Enquiry" class="btn-contact">Talk to DSP →</a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const presets = [
+      {
+        text: `"Hey, need an appointment with Dr. Sharma for acne treatment tomorrow around 4 PM. Is a slot available?"`,
+        service: "Dr. Sharma Acne Consultation",
+        slot: "Tomorrow · 4:00 PM - 4:30 PM",
+        doctor: "Dr. Sharma",
+        phone: "+91 98480 23110"
+      },
+      {
+        text: `"Hi, can I get a HydraFacial session this Saturday evening around 6 PM? What is the cost?"`,
+        service: "HydraFacial Glow Session",
+        slot: "Saturday · 6:00 PM - 7:00 PM",
+        doctor: "Clinic Staff",
+        phone: "+91 97000 84219"
+      },
+      {
+        text: `"Hello, I already have an appointment with Dr. Sharma on Thursday, can I reschedule it to Friday 11 AM?"`,
+        service: "Consultation Reschedule",
+        slot: "Friday · 11:00 AM - 11:30 AM",
+        doctor: "Dr. Sharma",
+        phone: "+91 94401 56322"
+      }
+    ]
+
+    let currentPreset = 0
+    let isRunning = false
+
+    function selectPreset(index) {
+      if (isRunning) return
+      currentPreset = index
+      document.querySelectorAll('.preset-btn').forEach((btn, i) => {
+        btn.classList.toggle('active', i === index)
+      })
+      document.getElementById('payloadInput').value = presets[index].text
+    }
+
+    function timestamp() {
+      const now = new Date()
+      return now.toTimeString().split(' ')[0] + '.' + String(now.getMilliseconds()).padStart(3, '0')
+    }
+
+    function addLog(tagClass, tagText, message, json = null) {
+      const terminal = document.getElementById('terminal')
+      const line = document.createElement('div')
+      line.className = 'log-line'
+      
+      let html = `<span class="log-time">${timestamp()}</span>
+                  <span class="log-tag ${tagClass}">${tagText}</span>
+                  <div class="log-content">${message}`
+      
+      if (json) {
+        html += `<pre class="log-json">${JSON.stringify(json, null, 2)}</pre>`
+      }
+      html += `</div>`
+
+      line.innerHTML = html
+      terminal.appendChild(line)
+      terminal.scrollTop = terminal.scrollHeight
+    }
+
+    function resetNodes() {
+      for (let i = 0; i <= 4; i++) {
+        const node = document.getElementById(`node-${i}`)
+        node.className = 'node-item'
+        node.querySelector('.node-status').textContent = 'STANDBY'
+      }
+    }
+
+    function setNodeState(nodeIndex, state, statusText) {
+      const node = document.getElementById(`node-${nodeIndex}`)
+      node.className = `node-item ${state}`
+      node.querySelector('.node-status').textContent = statusText
+    }
+
+    async function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms))
+    }
+
+    async function runPipeline() {
+      if (isRunning) return
+      isRunning = true
+      const btn = document.getElementById('dispatchBtn')
+      btn.disabled = true
+      btn.innerHTML = `<span>⏳ Processing Webhook...</span>`
+
+      const p = presets[currentPreset]
+      const startTime = performance.now()
+      const timerEl = document.getElementById('executionTimer')
+
+      // Reset state inspector
+      document.getElementById('recordStatus').textContent = 'PROCESSING'
+      document.getElementById('recordStatus').style.color = 'var(--primary)'
+      document.getElementById('recService').textContent = p.service
+      document.getElementById('recSlot').textContent = 'Checking availability...'
+      document.getElementById('recWa').textContent = 'Queued'
+      document.getElementById('latencyStat').textContent = '-- ms'
+      document.getElementById('tokensStat').textContent = '--'
+
+      resetNodes()
+
+      // Step 1: Webhook Ingest
+      setNodeState(0, 'active', 'INGESTING')
+      addLog('tag-webhook', 'WEBHOOK', 'POST /v1/incoming-whatsapp [200 OK] — HMAC verified', {
+        event_id: 'evt_' + Math.random().toString(36).substring(2, 9),
+        sender: p.phone,
+        channel: 'whatsapp_cloud_api',
+        text: document.getElementById('payloadInput').value
+      })
+      await sleep(350)
+      setNodeState(0, 'complete', 'VERIFIED')
+
+      // Step 2: AI Intent & NER
+      setNodeState(1, 'active', 'ANALYZING')
+      addLog('tag-agent', 'AI AGENT', 'Evaluating message with function calling schema (tools: [check_calendar_slot, upsert_patient, send_whatsapp_template])')
+      await sleep(500)
+      addLog('tag-agent', 'NER PARSED', 'Extracted Entities:', {
+        intent: 'book_appointment',
+        requested_doctor: p.doctor,
+        requested_slot: p.slot,
+        service: p.service,
+        confidence_score: 0.982
+      })
+      setNodeState(1, 'complete', 'TOOL CALL')
+
+      // Step 3: Tool Execution (Calendar check)
+      setNodeState(2, 'active', 'CALLING')
+      addLog('tag-tool', 'TOOL EXEC', `Executing: calendar_api.querySlotAvailability(provider="${p.doctor}", window="${p.slot}")`)
+      await sleep(400)
+      addLog('tag-tool', 'TOOL RES', `Slot CONFIRMED: Room 302 available at ${p.slot}. Calendar mutex locked.`)
+      setNodeState(2, 'complete', 'CONFIRMED')
+
+      // Update right panel
+      document.getElementById('recSlot').textContent = p.slot
+      document.getElementById('recSlot').style.color = 'var(--green)'
+
+      // Step 4: DB Sync
+      setNodeState(3, 'active', 'UPSERTING')
+      const recId = 'usr_' + Math.random().toString(36).substring(2, 8)
+      document.getElementById('recId').textContent = recId
+      addLog('tag-db', 'POSTGRES', `Upserting patient transaction ID ${recId} in table 'appointments' with status='CONFIRMED'`)
+      await sleep(350)
+      addLog('tag-db', 'MUTATION', 'Transaction committed with 0 lock contentions. Index synced.')
+      setNodeState(3, 'complete', 'COMMITTED')
+
+      // Step 5: WhatsApp API Dispatch
+      setNodeState(4, 'active', 'DISPATCHING')
+      addLog('tag-out', 'WHATSAPP', `Calling WhatsApp Cloud API gateway with template 'appointment_confirmation_v2'`)
+      await sleep(350)
+      addLog('tag-out', 'GATEWAY', `HTTP 200 OK — Message delivered to ${p.phone} with quick-reply CTA buttons.`)
+      setNodeState(4, 'complete', 'DELIVERED')
+
+      // Finalize
+      const totalTime = Math.round(performance.now() - startTime)
+      const tokenCount = Math.floor(Math.random() * 80) + 320
+      timerEl.textContent = `SUCCESS · ${(totalTime / 1000).toFixed(2)}s`
+      document.getElementById('latencyStat').textContent = `${totalTime} ms`
+      document.getElementById('tokensStat').textContent = tokenCount
+      document.getElementById('recWa').textContent = 'Delivered (200 OK)'
+      document.getElementById('recWa').style.color = 'var(--green)'
+      document.getElementById('recordStatus').textContent = 'CONFIRMED'
+      document.getElementById('recordStatus').style.color = 'var(--green)'
+
+      addLog('tag-webhook', 'PIPELINE END', `Execution finished in ${totalTime}ms · All 5 micro-tasks completed autonomously.`)
+
+      btn.disabled = false
+      btn.innerHTML = `<span>⚡ Dispatch Live Webhook</span>`
+      isRunning = false
+    }
+  </script>
+
+</body>
+</html>

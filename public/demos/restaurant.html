@@ -1,0 +1,556 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ember — Fine Dining</title>
+  <meta name="description" content="Ember — A contemporary fine dining experience. Reserve your table tonight." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #0a0905;
+      --bg2:      #111008;
+      --gold:     #c9a84c;
+      --gold-dim: #8a6e2f;
+      --cream:    #f0e9d6;
+      --muted:    #6b6455;
+      --border:   #1e1c15;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans:  'Inter', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+
+    body {
+      background: var(--bg);
+      color: var(--cream);
+      font-family: var(--font-sans);
+      font-size: 1.0625rem;
+      line-height: 1.7;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; width: 100%; }
+    ::selection { background: var(--gold); color: var(--bg); }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-thumb { background: var(--gold-dim); }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 4rem; height: 72px;
+      transition: background 0.4s ease, border-color 0.4s ease;
+      border-bottom: 1px solid transparent;
+    }
+    nav.scrolled {
+      background: rgba(10, 9, 5, 0.92);
+      backdrop-filter: blur(12px);
+      border-color: var(--border);
+    }
+    .nav-logo {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      color: var(--gold);
+    }
+    .nav-links { display: flex; gap: 2.5rem; }
+    .nav-links a {
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--cream); }
+    .nav-cta {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: 1px solid var(--gold-dim);
+      color: var(--gold);
+      padding: 0.5rem 1.25rem;
+      transition: background 0.2s, color 0.2s;
+    }
+    .nav-cta:hover { background: var(--gold); color: var(--bg); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 6rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(to bottom, rgba(10,9,5,0.3) 0%, rgba(10,9,5,0.85) 100%),
+        url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1600&q=80') center/cover no-repeat;
+    }
+    .hero-content { position: relative; max-width: 720px; }
+    .hero-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 2rem;
+      display: flex; align-items: center; gap: 1rem; justify-content: center;
+    }
+    .hero-label::before, .hero-label::after {
+      content: ''; flex: 1; max-width: 48px; height: 1px; background: var(--gold-dim);
+    }
+    .hero h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(3.5rem, 8vw, 7rem);
+      font-weight: 300;
+      line-height: 1.0;
+      letter-spacing: 0.04em;
+      color: var(--cream);
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 em { font-style: italic; color: var(--gold); }
+    .hero-sub {
+      font-size: 1rem;
+      color: rgba(240, 233, 214, 0.6);
+      letter-spacing: 0.03em;
+      margin-bottom: 3rem;
+      line-height: 1.8;
+    }
+    .hero-ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--bg);
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 1rem 2.5rem;
+      transition: opacity 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.88; }
+    .btn-ghost {
+      display: inline-block;
+      border: 1px solid rgba(240,233,214,0.2);
+      color: rgba(240,233,214,0.6);
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 1rem 2.5rem;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-ghost:hover { border-color: var(--cream); color: var(--cream); }
+
+    /* ── INTRO STRIP ── */
+    .intro-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .intro-item {
+      padding: 3rem 2.5rem;
+      display: flex; flex-direction: column; align-items: center; text-align: center; gap: 0.75rem;
+      border-right: 1px solid var(--border);
+    }
+    .intro-item:last-child { border-right: none; }
+    .intro-icon { font-size: 1.2rem; color: var(--gold); margin-bottom: 0.25rem; }
+    .intro-title {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      color: var(--cream);
+      font-weight: 400;
+    }
+    .intro-text { font-size: 0.875rem; color: var(--muted); line-height: 1.7; }
+
+    /* ── SECTION SHARED ── */
+    .section { padding: 7rem 4rem; max-width: 1200px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: flex; align-items: center; gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .section-label::after { content: ''; flex: 1; max-width: 32px; height: 1px; background: var(--gold-dim); }
+
+    /* ── MENU ── */
+    .menu-section { padding: 7rem 4rem; border-top: 1px solid var(--border); }
+    .menu-inner { max-width: 1200px; margin: 0 auto; }
+    .menu-heading {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 300;
+      color: var(--cream);
+      margin-bottom: 0.5rem;
+    }
+    .menu-sub { font-size: 0.85rem; color: var(--muted); margin-bottom: 4rem; }
+
+    .menu-tabs { display: flex; gap: 2rem; margin-bottom: 3rem; border-bottom: 1px solid var(--border); }
+    .menu-tab {
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding-bottom: 1rem;
+      cursor: pointer;
+      border-bottom: 1px solid transparent;
+      margin-bottom: -1px;
+      transition: color 0.2s, border-color 0.2s;
+      background: none; border-left: none; border-right: none; border-top: none;
+      font-family: inherit;
+    }
+    .menu-tab:hover { color: var(--cream); }
+    .menu-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+    .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); }
+    .menu-item {
+      background: var(--bg);
+      padding: 1.75rem 2rem;
+      display: flex; justify-content: space-between; gap: 2rem; align-items: flex-start;
+      transition: background 0.2s;
+    }
+    .menu-item:hover { background: var(--bg2); }
+    .menu-item-left { flex: 1; }
+    .menu-item-name {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: var(--cream);
+      margin-bottom: 0.35rem;
+    }
+    .menu-item-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+    .menu-item-price {
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
+      color: var(--gold);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* ── STORY ── */
+    .story-section {
+      padding: 7rem 4rem;
+      border-top: 1px solid var(--border);
+      display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center;
+      max-width: 1200px; margin: 0 auto;
+    }
+    .story-img-wrap {
+      aspect-ratio: 4/5;
+      overflow: hidden;
+      position: relative;
+    }
+    .story-img-wrap img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.85) sepia(0.15); }
+    .story-label { margin-bottom: 1.5rem; }
+    .story-heading {
+      font-family: var(--font-serif);
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 300;
+      line-height: 1.2;
+      color: var(--cream);
+      margin-bottom: 1.5rem;
+    }
+    .story-heading em { font-style: italic; color: var(--gold); }
+    .story-text { font-size: 0.95rem; color: var(--muted); line-height: 1.9; margin-bottom: 2rem; }
+
+    /* ── RESERVE ── */
+    .reserve-section {
+      padding: 7rem 4rem;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      background: var(--bg2);
+    }
+    .reserve-inner { max-width: 640px; margin: 0 auto; }
+    .reserve-heading {
+      font-family: var(--font-serif);
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      font-weight: 300;
+      color: var(--cream);
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+    .reserve-sub { font-size: 0.95rem; color: var(--muted); margin-bottom: 3rem; line-height: 1.8; }
+    .reserve-form { display: flex; flex-direction: column; gap: 0.75rem; max-width: 480px; margin: 0 auto 2rem; }
+    .reserve-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+    .form-input {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--cream);
+      padding: 0.875rem 1rem;
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+    .form-input::placeholder { color: var(--muted); }
+    .form-input:focus { border-color: var(--gold-dim); }
+    .reserve-note { font-size: 0.72rem; color: var(--muted); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 3rem 4rem;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1.5rem;
+    }
+    .footer-logo { font-family: var(--font-serif); font-size: 1.2rem; color: var(--gold); letter-spacing: 0.1em; }
+    .footer-links { display: flex; gap: 2rem; }
+    .footer-links a { font-size: 0.75rem; color: var(--muted); letter-spacing: 0.08em; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--cream); }
+    .footer-copy { font-size: 0.72rem; color: var(--muted); }
+
+    /* ── HIDDEN PANEL ── */
+    .panel { display: none; }
+    .panel.active { display: grid; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { animation: fadeUp 0.8s ease forwards; }
+    .delay-1 { animation-delay: 0.15s; opacity: 0; }
+    .delay-2 { animation-delay: 0.3s; opacity: 0; }
+    .delay-3 { animation-delay: 0.45s; opacity: 0; }
+
+    /* ── DEMO BADGE ── */
+    .demo-badge {
+      position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 200;
+      background: var(--gold); color: var(--bg);
+      font-size: 0.65rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.5rem 1rem;
+      box-shadow: 0 4px 20px rgba(201,168,76,0.3);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 0 1.5rem; }
+      .nav-links { display: none; }
+      .section, .menu-section { padding: 5rem 1.5rem; }
+      .intro-strip { grid-template-columns: 1fr; }
+      .intro-item { border-right: none; border-bottom: 1px solid var(--border); }
+      .menu-grid { grid-template-columns: 1fr; }
+      .story-section { grid-template-columns: 1fr; padding: 4rem 1.5rem; gap: 2.5rem; }
+      .reserve-section { padding: 5rem 1.5rem; }
+      .reserve-row { grid-template-columns: 1fr; }
+      footer { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <span class="nav-logo">EMBER</span>
+    <div class="nav-links">
+      <a href="#menu">Menu</a>
+      <a href="#story">Our Story</a>
+      <a href="#reserve">Reserve</a>
+    </div>
+    <a href="#reserve" class="nav-cta">Reserve a Table</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <p class="hero-label fade-up">Est. 2019 · Hyderabad</p>
+      <h1 class="fade-up delay-1">Where <em>fire</em><br>meets flavour</h1>
+      <p class="hero-sub fade-up delay-2">
+        A contemporary fine dining experience rooted in seasonal ingredients<br>
+        and the ancient craft of live-fire cooking.
+      </p>
+      <div class="hero-ctas fade-up delay-3">
+        <a href="#reserve" class="btn-primary">Reserve a Table</a>
+        <a href="#menu" class="btn-ghost">Explore the Menu</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTRO STRIP -->
+  <div class="intro-strip">
+    <div class="intro-item">
+      <div class="intro-icon">◈</div>
+      <div class="intro-title">Seasonal Menu</div>
+      <p class="intro-text">Curated weekly around the freshest local harvest. No dish stays the same.</p>
+    </div>
+    <div class="intro-item">
+      <div class="intro-icon">◈</div>
+      <div class="intro-title">Live Fire Kitchen</div>
+      <p class="intro-text">Every plate passes through our open hearth. Smoke, char, and precision.</p>
+    </div>
+    <div class="intro-item">
+      <div class="intro-icon">◈</div>
+      <div class="intro-title">Private Dining</div>
+      <p class="intro-text">Intimate spaces for events, celebrations, and curated tasting evenings.</p>
+    </div>
+  </div>
+
+  <!-- MENU -->
+  <section class="menu-section" id="menu">
+    <div class="menu-inner">
+      <div class="section-label">The Menu</div>
+      <h2 class="menu-heading">Crafted with intention</h2>
+      <p class="menu-sub">Prices in ₹ · Seasonal availability may vary</p>
+
+      <div class="menu-tabs">
+        <button class="menu-tab active" onclick="switchTab('starters', this)">Starters</button>
+        <button class="menu-tab" onclick="switchTab('mains', this)">Mains</button>
+        <button class="menu-tab" onclick="switchTab('desserts', this)">Desserts</button>
+        <button class="menu-tab" onclick="switchTab('drinks', this)">Drinks</button>
+      </div>
+
+      <div id="starters" class="menu-grid panel active">
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Smoked Burrata</div><div class="menu-item-desc">Cold-smoked for 4 hours · heirloom tomato · basil oil · grilled sourdough</div></div><div class="menu-item-price">₹680</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Charred Prawns</div><div class="menu-item-desc">Live fire · mango & chilli glaze · microgreens · lime aioli</div></div><div class="menu-item-price">₹820</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Wild Mushroom Toast</div><div class="menu-item-desc">Truffle butter · aged parmesan · herb oil · brioche</div></div><div class="menu-item-price">₹560</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Beet Carpaccio</div><div class="menu-item-desc">Roasted golden beet · goat cheese · candied walnut · orange dressing</div></div><div class="menu-item-price">₹480</div></div>
+      </div>
+
+      <div id="mains" class="menu-grid panel">
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Ember Lamb Chops</div><div class="menu-item-desc">Slow-roasted · rosemary jus · seasonal greens · potato gratin</div></div><div class="menu-item-price">₹1,850</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Fire-Roasted Sea Bass</div><div class="menu-item-desc">Whole fish · capers · lemon butter · charred fennel</div></div><div class="menu-item-price">₹1,480</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Wild Mushroom Risotto</div><div class="menu-item-desc">Aged parmesan · truffle oil · fresh herbs · crisp shallot</div></div><div class="menu-item-price">₹980</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Dry-Aged Ribeye</div><div class="menu-item-desc">45-day aged · chimichurri · bone marrow butter · fries</div></div><div class="menu-item-price">₹2,400</div></div>
+      </div>
+
+      <div id="desserts" class="menu-grid panel">
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Valrhona Chocolate Tart</div><div class="menu-item-desc">Dark chocolate ganache · salted caramel · vanilla bean ice cream</div></div><div class="menu-item-price">₹480</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Seasonal Fruit Pavlova</div><div class="menu-item-desc">Meringue · chantilly cream · fresh berries · passion fruit curd</div></div><div class="menu-item-price">₹420</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Crème Brûlée</div><div class="menu-item-desc">Classic vanilla · torched sugar · tuile biscuit</div></div><div class="menu-item-price">₹380</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Cheese Board</div><div class="menu-item-desc">Three artisan cheeses · quince paste · crackers · honeycomb</div></div><div class="menu-item-price">₹620</div></div>
+      </div>
+
+      <div id="drinks" class="menu-grid panel">
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Ember Signature Cocktail</div><div class="menu-item-desc">House bourbon · smoked honey · orange bitters · ice sphere</div></div><div class="menu-item-price">₹680</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Sparkling Elderflower</div><div class="menu-item-desc">Non-alcoholic · elderflower · lime · soda · mint</div></div><div class="menu-item-price">₹280</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Single Origin Pour-Over</div><div class="menu-item-desc">Ethiopian Yirgacheffe · filter or espresso</div></div><div class="menu-item-price">₹220</div></div>
+        <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Curated Wine (Glass)</div><div class="menu-item-desc">Rotating selection · ask your server for today's list</div></div><div class="menu-item-price">From ₹580</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORY -->
+  <div style="border-top: 1px solid var(--border)">
+    <div class="story-section" id="story">
+      <div class="story-img-wrap">
+        <img src="https://images.unsplash.com/photo-1600565193348-f74bd3c7ccdf?w=800&q=80" alt="Chef at work in the Ember kitchen" />
+      </div>
+      <div>
+        <div class="section-label story-label">Our Story</div>
+        <h2 class="story-heading">Food is best<br>when it's <em>honest</em></h2>
+        <p class="story-text">
+          Ember began with a single hearth and a simple belief: that great food doesn't need theatre — just care, quality ingredients, and time.
+        </p>
+        <p class="story-text">
+          Our kitchen works with farmers and fishers within 200 km. The menu changes when ingredients peak. Nothing is frozen. Everything is made here.
+        </p>
+        <a href="#reserve" class="btn-primary">Come Dine With Us</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESERVE -->
+  <section class="reserve-section" id="reserve">
+    <div class="reserve-inner">
+      <div class="section-label" style="justify-content: center; margin-bottom: 1rem;">Reservations</div>
+      <h2 class="reserve-heading">Join us for<br><em>an evening</em></h2>
+      <p class="reserve-sub">We accommodate parties of 2–14. For larger groups or private events, reach us directly.</p>
+
+      <form class="reserve-form" onsubmit="handleReserve(event)">
+        <div class="reserve-row">
+          <input class="form-input" type="text" placeholder="Full name" required />
+          <input class="form-input" type="tel" placeholder="Phone number" required />
+        </div>
+        <div class="reserve-row">
+          <input class="form-input" type="date" required />
+          <input class="form-input" type="number" min="1" max="14" placeholder="Guests" required />
+        </div>
+        <input class="form-input" type="text" placeholder="Special requests (optional)" />
+        <button type="submit" class="btn-primary" style="width: 100%; cursor: pointer; font-family: inherit;">
+          Confirm Reservation
+        </button>
+      </form>
+
+      <p class="reserve-note">You'll receive a confirmation call within 2 hours. Cancellations accepted up to 4 hours before.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">EMBER</div>
+    <div class="footer-links">
+      <a href="#menu">Menu</a>
+      <a href="#story">Story</a>
+      <a href="#reserve">Reserve</a>
+      <a href="tel:+914012345678">+91 40 1234 5678</a>
+    </div>
+    <p class="footer-copy">Banjara Hills, Hyderabad · Open Tue–Sun, 7pm–11pm</p>
+  </footer>
+
+  <!-- DEMO BADGE -->
+  <div class="demo-badge">Demo by DSP</div>
+
+  <script>
+    // Nav scroll effect
+    const navbar = document.getElementById('navbar')
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 50)
+    })
+
+    // Menu tabs
+    function switchTab(id, btn) {
+      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'))
+      document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'))
+      document.getElementById(id).classList.add('active')
+      btn.classList.add('active')
+    }
+
+    // Reservation form
+    function handleReserve(e) {
+      e.preventDefault()
+      const btn = e.target.querySelector('button[type="submit"]')
+      btn.textContent = '✓ Reservation Received'
+      btn.style.background = '#2a4a2a'
+      btn.style.color = '#a0c8a0'
+      setTimeout(() => {
+        btn.textContent = 'Confirm Reservation'
+        btn.style.background = ''
+        btn.style.color = ''
+        e.target.reset()
+      }, 3000)
+    }
+
+    // Intersection observer for scroll animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.style.opacity = '1'
+          e.target.style.transform = 'translateY(0)'
+        }
+      })
+    }, { threshold: 0.1 })
+
+    document.querySelectorAll('.menu-item, .intro-item').forEach(el => {
+      el.style.opacity = '0'
+      el.style.transform = 'translateY(16px)'
+      el.style.transition = 'opacity 0.5s ease, transform 0.5s ease'
+      observer.observe(el)
+    })
+  </script>
+
+</body>
+</html>

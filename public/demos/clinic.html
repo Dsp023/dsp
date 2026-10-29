@@ -1,0 +1,2256 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AURA Aesthetics & Dental Sanctuary — Jubilee Hills, Hyderabad</title>
+  <meta name="description" content="Hyderabad's premier cosmetic dermatology and digital dentistry clinic on Road No. 36, Jubilee Hills. US-FDA approved technologies & AIIMS certified specialists." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f8fafc;
+      --bg-white: #ffffff;
+      --bg-teal-subtle: #f0fdfa;
+      --bg-mint-subtle: #ecfdf5;
+      --text-main: #0f172a;
+      --text-body: #334155;
+      --text-muted: #64748b;
+      --text-dim: #94a3b8;
+      --teal-primary: #0f766e;
+      --teal-accent: #0d9488;
+      --teal-bright: #14b8a6;
+      --teal-dark: #134e4a;
+      --teal-glow: rgba(13, 148, 136, 0.12);
+      --teal-border: rgba(13, 148, 136, 0.22);
+      --border-subtle: #e2e8f0;
+      --border-strong: #cbd5e1;
+      --gold-accent: #d97706;
+      --gold-bg: #fffbeb;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 20px -2px rgba(15, 23, 42, 0.06);
+      --shadow-lg: 0 20px 40px -10px rgba(15, 23, 42, 0.08);
+      --shadow-teal: 0 12px 30px -8px rgba(13, 148, 136, 0.25);
+      --font-heading: 'Playfair Display', Georgia, serif;
+      --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+    }
+
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+    body {
+      background: var(--bg);
+      color: var(--text-body);
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    ::selection { background: var(--teal-accent); color: #fff; }
+
+    /* ── TOP UTILITY STRIP ── */
+    .topbar {
+      background: #042f2e;
+      color: #ccfbf1;
+      font-size: 0.78rem;
+      padding: 8px 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      letter-spacing: 0.02em;
+    }
+    .topbar-left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .status-live {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(20, 184, 166, 0.2);
+      border: 1px solid rgba(45, 212, 191, 0.3);
+      padding: 2px 10px;
+      border-radius: 20px;
+      font-weight: 600;
+      color: #5eead4;
+    }
+    .status-live::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      background: #2dd4bf;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #2dd4bf;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .topbar-right a {
+      color: #ccfbf1;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: color 0.2s;
+    }
+    .topbar-right a:hover { color: #ffffff; }
+
+    /* ── NAVIGATION ── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-sm);
+    }
+    nav {
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 0 3rem;
+      height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .brand-icon {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, var(--teal-primary), var(--teal-bright));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 1.35rem;
+      font-weight: 700;
+      box-shadow: 0 4px 12px rgba(15, 118, 110, 0.2);
+    }
+    .brand-text { display: flex; flex-direction: column; }
+    .brand-name {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: var(--teal-dark);
+      line-height: 1;
+    }
+    .brand-tag {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--teal-accent);
+      margin-top: 3px;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.2rem;
+    }
+    .nav-links a {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--teal-primary); }
+    .nav-action-group {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .btn-nav-wa {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #065f46;
+      background: #d1fae5;
+      padding: 0.6rem 1.1rem;
+      border-radius: 30px;
+      transition: all 0.2s;
+    }
+    .btn-nav-wa:hover { background: #a7f3d0; transform: translateY(-1px); }
+    .btn-nav-book {
+      background: linear-gradient(135deg, var(--teal-primary), var(--teal-dark));
+      color: #fff;
+      font-size: 0.84rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      padding: 0.68rem 1.45rem;
+      border-radius: 8px;
+      box-shadow: var(--shadow-teal);
+      transition: all 0.2s;
+    }
+    .btn-nav-book:hover { transform: translateY(-1px); box-shadow: 0 14px 28px -6px rgba(13, 148, 136, 0.35); }
+
+    /* ── HERO SECTION ── */
+    .hero {
+      position: relative;
+      background: radial-gradient(circle at 10% 20%, #e6f7f5 0%, #f8fafc 50%),
+                  radial-gradient(circle at 90% 80%, #f0fdf4 0%, transparent 60%);
+      padding: 4.5rem 3rem 5rem;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .hero-container {
+      max-width: 1360px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .hero-content { z-index: 2; }
+    .hero-accreditation {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--bg-white);
+      border: 1px solid var(--border-subtle);
+      padding: 6px 14px;
+      border-radius: 30px;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 1.5rem;
+    }
+    .hero-accreditation-badge {
+      background: var(--teal-primary);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 20px;
+    }
+    .hero-accreditation-text {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--teal-dark);
+    }
+    .hero h1 {
+      font-family: var(--font-heading);
+      font-size: clamp(2.6rem, 4.4vw, 3.8rem);
+      font-weight: 600;
+      line-height: 1.12;
+      color: var(--text-main);
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.015em;
+    }
+    .hero h1 span.highlight {
+      color: var(--teal-primary);
+      font-style: italic;
+      position: relative;
+      display: inline-block;
+    }
+    .hero h1 span.highlight::after {
+      content: '';
+      position: absolute;
+      bottom: 6px;
+      left: 0;
+      width: 100%;
+      height: 6px;
+      background: rgba(20, 184, 166, 0.22);
+      border-radius: 4px;
+      z-index: -1;
+    }
+    .hero-lead {
+      font-size: 1.12rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+      max-width: 580px;
+      margin-bottom: 2rem;
+    }
+
+    /* Hero Concern Selector Quick Bar */
+    .concern-bar {
+      background: var(--bg-white);
+      border: 1px solid var(--border-strong);
+      padding: 10px 14px 10px 20px;
+      border-radius: 12px;
+      box-shadow: var(--shadow-md);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      max-width: 580px;
+      margin-bottom: 2.2rem;
+    }
+    .concern-icon { font-size: 1.2rem; color: var(--teal-accent); }
+    .concern-selector {
+      flex: 1;
+      border: none;
+      outline: none;
+      font-family: var(--font-sans);
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--text-main);
+      background: transparent;
+      cursor: pointer;
+    }
+    .btn-concern-go {
+      background: var(--teal-primary);
+      color: #fff;
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 0.65rem 1.25rem;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+    .btn-concern-go:hover { background: var(--teal-dark); }
+
+    /* Doctor credential trust row */
+    .hero-doctor-trust {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(203, 213, 225, 0.6);
+    }
+    .doctor-avatars { display: flex; }
+    .doctor-avatars img {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      object-fit: cover;
+      margin-left: -10px;
+      box-shadow: var(--shadow-sm);
+    }
+    .doctor-avatars img:first-child { margin-left: 0; }
+    .doctor-trust-info strong {
+      display: block;
+      font-size: 0.88rem;
+      color: var(--text-main);
+      font-weight: 700;
+    }
+    .doctor-trust-info span {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+    }
+
+    /* Hero Right Visual Column */
+    .hero-visual {
+      position: relative;
+    }
+    .hero-main-card {
+      position: relative;
+      background: var(--bg-white);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border-subtle);
+    }
+    .hero-main-card img {
+      width: 100%;
+      height: 480px;
+      object-fit: cover;
+      display: block;
+    }
+    .hero-img-gradient {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 60%, rgba(15, 23, 42, 0.4) 100%);
+    }
+
+    /* Floating Badges on Hero Image */
+    .hero-float-tech {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      box-shadow: var(--shadow-md);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .tech-pill-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--teal-accent);
+    }
+    .hero-float-tech span {
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: var(--teal-dark);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .hero-float-review {
+      position: absolute;
+      bottom: -24px;
+      left: -20px;
+      background: var(--bg-white);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      box-shadow: var(--shadow-lg);
+      max-width: 320px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .review-google-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: #f1f5f9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #ea4335;
+      flex-shrink: 0;
+    }
+    .review-meta strong {
+      display: block;
+      font-size: 0.88rem;
+      color: var(--text-main);
+    }
+    .review-stars {
+      color: #f59e0b;
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      margin: 2px 0;
+    }
+    .review-meta span {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      display: block;
+    }
+
+    /* ── CLINICAL TRUST METRICS STRIP ── */
+    .metrics-strip {
+      background: var(--bg-white);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 2.8rem 3rem;
+    }
+    .metrics-container {
+      max-width: 1360px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+    }
+    .metric-box {
+      border-right: 1px solid var(--border-subtle);
+      padding: 0 1.5rem;
+    }
+    .metric-box:last-child { border-right: none; }
+    .metric-number {
+      font-family: var(--font-heading);
+      font-size: 2.6rem;
+      font-weight: 700;
+      color: var(--teal-primary);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .metric-label {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 2px;
+    }
+    .metric-sub {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* ── CLINICAL BEFORE & AFTER / EVIDENCE SHOWCASE ── */
+    .evidence-section {
+      padding: 6.5rem 3rem;
+      max-width: 1360px;
+      margin: 0 auto;
+    }
+    .section-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--teal-primary);
+      background: var(--bg-teal-subtle);
+      border: 1px solid var(--teal-border);
+      padding: 5px 12px;
+      border-radius: 20px;
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: clamp(2.2rem, 3.5vw, 3rem);
+      font-weight: 600;
+      color: var(--text-main);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    .section-subtitle {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 680px;
+      line-height: 1.7;
+    }
+    .section-head-split {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 3.5rem;
+      gap: 2rem;
+    }
+    .case-nav-pills {
+      display: flex;
+      gap: 8px;
+      background: var(--bg-white);
+      padding: 4px;
+      border-radius: 10px;
+      border: 1px solid var(--border-subtle);
+    }
+    .case-pill-btn {
+      background: transparent;
+      border: none;
+      padding: 0.65rem 1.2rem;
+      font-family: var(--font-sans);
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .case-pill-btn.active {
+      background: var(--teal-primary);
+      color: #fff;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .case-display-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 3rem;
+      background: var(--bg-white);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      box-shadow: var(--shadow-md);
+      align-items: center;
+    }
+    .case-images-duo {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      position: relative;
+    }
+    .case-img-card {
+      position: relative;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+      background: #f1f5f9;
+      height: 380px;
+    }
+    .case-img-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .case-badge-pill {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(8px);
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 4px;
+    }
+    .case-badge-after {
+      background: var(--teal-primary);
+    }
+
+    .case-details-panel h3 {
+      font-family: var(--font-heading);
+      font-size: 1.85rem;
+      color: var(--text-main);
+      margin-bottom: 0.75rem;
+      line-height: 1.25;
+    }
+    .case-protocol-tag {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--teal-primary);
+      background: var(--bg-teal-subtle);
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 1.25rem;
+    }
+    .case-body-text {
+      font-size: 0.95rem;
+      color: var(--text-body);
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+    .case-metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 1.25rem 0;
+      margin-bottom: 2rem;
+    }
+    .case-metric-item strong {
+      display: block;
+      font-size: 1.15rem;
+      color: var(--teal-dark);
+      font-weight: 700;
+    }
+    .case-metric-item span {
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .case-cta-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    /* ── CLINICAL DIRECTORY & PROCEDURES (TABS) ── */
+    .directory-section {
+      background: #f1f5f9;
+      padding: 6.5rem 3rem;
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .directory-container {
+      max-width: 1360px;
+      margin: 0 auto;
+    }
+    .directory-header {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 3.5rem;
+    }
+    .category-filter-bar {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 3rem;
+    }
+    .filter-btn {
+      background: var(--bg-white);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 0.75rem 1.6rem;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: var(--shadow-sm);
+    }
+    .filter-btn:hover { border-color: var(--teal-primary); color: var(--teal-primary); }
+    .filter-btn.active {
+      background: var(--teal-primary);
+      color: #fff;
+      border-color: var(--teal-primary);
+      box-shadow: var(--shadow-teal);
+    }
+
+    /* Treatment Cards Grid */
+    .procedures-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    .procedure-card {
+      background: var(--bg-white);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .procedure-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--teal-border);
+    }
+    .procedure-img-wrap {
+      position: relative;
+      height: 220px;
+      overflow: hidden;
+      background: #e2e8f0;
+    }
+    .procedure-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .procedure-card:hover .procedure-img-wrap img { transform: scale(1.05); }
+    .procedure-device-badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      color: var(--teal-dark);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      padding: 4px 10px;
+      border-radius: 20px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(226, 232, 240, 0.8);
+    }
+    .procedure-body {
+      padding: 1.75rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .procedure-dept {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--teal-accent);
+      margin-bottom: 6px;
+    }
+    .procedure-title {
+      font-family: var(--font-heading);
+      font-size: 1.45rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 0.65rem;
+      line-height: 1.3;
+    }
+    .procedure-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      flex: 1;
+    }
+    .procedure-spec-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #f8fafc;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      color: var(--text-body);
+      margin-bottom: 1.5rem;
+      border: 1px solid var(--border-subtle);
+    }
+    .spec-item { display: flex; align-items: center; gap: 4px; font-weight: 500; }
+    .spec-bullet { color: var(--teal-accent); }
+    .procedure-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 1.25rem;
+    }
+    .procedure-fee-label { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; }
+    .procedure-price {
+      font-family: var(--font-heading);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--teal-primary);
+      line-height: 1;
+    }
+    .btn-card-book {
+      background: var(--bg-teal-subtle);
+      color: var(--teal-primary);
+      border: 1px solid var(--teal-border);
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 0.6rem 1.1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-card-book:hover {
+      background: var(--teal-primary);
+      color: #fff;
+    }
+
+    /* ── TECHNOLOGY & SAFETY PROTOCOLS ── */
+    .tech-section {
+      padding: 6.5rem 3rem;
+      max-width: 1360px;
+      margin: 0 auto;
+    }
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.75rem;
+      margin-top: 3.5rem;
+    }
+    .tech-card {
+      background: var(--bg-white);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 2rem 1.75rem;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s, border-color 0.2s;
+      position: relative;
+    }
+    .tech-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--teal-accent);
+      box-shadow: var(--shadow-md);
+    }
+    .tech-icon-box {
+      width: 52px;
+      height: 52px;
+      background: var(--bg-teal-subtle);
+      border: 1px solid var(--teal-border);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: var(--teal-primary);
+      margin-bottom: 1.5rem;
+    }
+    .tech-card h4 {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      color: var(--text-main);
+      margin-bottom: 0.5rem;
+    }
+    .tech-platform {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--teal-accent);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.85rem;
+      display: block;
+    }
+    .tech-card p {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ── MEDICAL FACULTY (DOCTORS) ── */
+    .doctors-section {
+      background: var(--bg-white);
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 6.5rem 3rem;
+    }
+    .doctors-container {
+      max-width: 1360px;
+      margin: 0 auto;
+    }
+    .doctors-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3rem;
+      margin-top: 3.5rem;
+    }
+    .doctor-card-elevated {
+      background: var(--bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      display: flex;
+      box-shadow: var(--shadow-md);
+    }
+    .doctor-img-col {
+      width: 250px;
+      flex-shrink: 0;
+      position: relative;
+    }
+    .doctor-img-col img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .doctor-badge-chip {
+      position: absolute;
+      bottom: 16px;
+      left: 16px;
+      background: rgba(15, 23, 42, 0.9);
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 4px;
+      backdrop-filter: blur(6px);
+    }
+    .doctor-info-col {
+      padding: 2.25rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .doctor-sub-dept {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--teal-primary);
+      margin-bottom: 4px;
+    }
+    .doctor-name-title {
+      font-family: var(--font-heading);
+      font-size: 1.75rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+    .doctor-degree {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--teal-dark);
+      margin-bottom: 1rem;
+      line-height: 1.4;
+    }
+    .doctor-narrative {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+      margin-bottom: 1.5rem;
+    }
+    .doctor-available-strip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.76rem;
+      font-weight: 600;
+      color: #065f46;
+      background: #ecfdf5;
+      padding: 6px 12px;
+      border-radius: 6px;
+      margin-bottom: 1.5rem;
+      width: fit-content;
+    }
+    .btn-select-doctor {
+      background: var(--teal-primary);
+      color: #fff;
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 0.7rem 1.4rem;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      width: fit-content;
+      transition: background 0.2s;
+    }
+    .btn-select-doctor:hover { background: var(--teal-dark); }
+
+    /* ── APPOINTMENT CONCIERGE WIDGET ── */
+    .booking-section {
+      padding: 6.5rem 3rem;
+      background: radial-gradient(circle at 50% 0%, #e6f4f1 0%, #f8fafc 70%);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .booking-wrapper {
+      max-width: 980px;
+      margin: 0 auto;
+      background: var(--bg-white);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+    }
+    .booking-header-bar {
+      background: linear-gradient(135deg, #042f2e, #0f766e);
+      color: #fff;
+      padding: 2.5rem 3rem;
+      text-align: center;
+    }
+    .booking-header-bar h2 {
+      font-family: var(--font-heading);
+      font-size: 2.2rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .booking-header-bar p {
+      font-size: 0.95rem;
+      color: #ccfbf1;
+      max-width: 580px;
+      margin: 0 auto;
+    }
+
+    .booking-inner-form {
+      padding: 3rem;
+    }
+    .form-grid-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.75rem;
+    }
+    .form-col-full { grid-column: span 2; }
+    .form-field-group label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+    .form-field-control {
+      width: 100%;
+      background: var(--bg);
+      border: 1.5px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 0.85rem 1.1rem;
+      font-family: var(--font-sans);
+      font-size: 0.92rem;
+      color: var(--text-main);
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .form-field-control:focus {
+      border-color: var(--teal-primary);
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.1);
+    }
+
+    /* Clickable Time Slots */
+    .time-slot-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--text-main);
+      margin-bottom: 8px;
+      display: block;
+    }
+    .slot-chips-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .slot-chip {
+      padding: 0.6rem 1rem;
+      background: var(--bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-body);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .slot-chip:hover { border-color: var(--teal-primary); color: var(--teal-primary); }
+    .slot-chip.selected {
+      background: var(--teal-primary);
+      color: #fff;
+      border-color: var(--teal-primary);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .booking-cta-btn {
+      width: 100%;
+      background: linear-gradient(135deg, var(--teal-primary), var(--teal-dark));
+      color: #fff;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 1.15rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: var(--shadow-teal);
+      transition: all 0.2s;
+      margin-top: 1rem;
+    }
+    .booking-cta-btn:hover {
+      box-shadow: 0 16px 32px -6px rgba(15, 118, 110, 0.4);
+      transform: translateY(-1px);
+    }
+    .booking-guarantee-note {
+      text-align: center;
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      margin-top: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    /* Booking Confirmation State */
+    .booking-confirmed-card {
+      display: none;
+      padding: 3.5rem 2rem;
+      text-align: center;
+    }
+    .confirmed-icon-circle {
+      width: 72px;
+      height: 72px;
+      background: #ecfdf5;
+      border: 2px solid #10b981;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      color: #059669;
+      margin: 0 auto 1.5rem;
+    }
+    .confirmed-title {
+      font-family: var(--font-heading);
+      font-size: 2.2rem;
+      color: var(--text-main);
+      margin-bottom: 0.5rem;
+    }
+    .confirmed-ref-pill {
+      display: inline-block;
+      background: #f1f5f9;
+      border: 1px solid var(--border-subtle);
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+    .whatsapp-simulation-box {
+      background: #dcf8c6;
+      border: 1px solid #c7e8a9;
+      border-radius: 12px;
+      padding: 1.5rem;
+      max-width: 500px;
+      margin: 0 auto 2rem;
+      text-align: left;
+      font-size: 0.85rem;
+      color: #075e54;
+      line-height: 1.6;
+      box-shadow: var(--shadow-sm);
+    }
+    .wa-sim-head {
+      font-weight: 700;
+      border-bottom: 1px solid rgba(7, 94, 84, 0.2);
+      padding-bottom: 8px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* ── PATIENT REVIEWS & LOCATION ── */
+    .reviews-section {
+      padding: 6.5rem 3rem;
+      max-width: 1360px;
+      margin: 0 auto;
+    }
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3.5rem;
+    }
+    .review-card-elevated {
+      background: var(--bg-white);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 2rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .review-card-top { margin-bottom: 1.5rem; }
+    .review-stars-gold { color: #f59e0b; font-size: 0.95rem; margin-bottom: 10px; }
+    .review-card-text {
+      font-size: 0.92rem;
+      color: var(--text-body);
+      line-height: 1.65;
+      font-style: italic;
+    }
+    .review-author-strip {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 1rem;
+    }
+    .author-initials {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--bg-teal-subtle);
+      color: var(--teal-primary);
+      font-weight: 700;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .author-details strong { display: block; font-size: 0.88rem; color: var(--text-main); }
+    .author-details span { font-size: 0.72rem; color: var(--text-muted); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #042f2e;
+      color: #ccfbf1;
+      padding: 5rem 3rem 2.5rem;
+    }
+    .footer-container {
+      max-width: 1360px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 4rem;
+    }
+    .footer-brand h3 {
+      font-family: var(--font-heading);
+      font-size: 1.7rem;
+      color: #fff;
+      margin-bottom: 0.75rem;
+    }
+    .footer-brand p {
+      font-size: 0.85rem;
+      color: #99f6e4;
+      line-height: 1.65;
+      max-width: 320px;
+      margin-bottom: 1.5rem;
+    }
+    .footer-col h5 {
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #5eead4;
+      margin-bottom: 1.25rem;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 0.65rem; }
+    .footer-col a {
+      font-size: 0.85rem;
+      color: #ccfbf1;
+      transition: color 0.2s;
+    }
+    .footer-col a:hover { color: #fff; }
+    .footer-bottom {
+      max-width: 1360px;
+      margin: 0 auto;
+      border-top: 1px solid rgba(20, 184, 166, 0.25);
+      padding-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: #99f6e4;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    /* ── FLOATING WATERMARK & WA ── */
+    .floating-wa-btn {
+      position: fixed;
+      bottom: 24px;
+      left: 24px;
+      z-index: 200;
+      background: #25d366;
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 40px;
+      font-weight: 700;
+      font-size: 0.84rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+      transition: transform 0.2s;
+    }
+    .floating-wa-btn:hover { transform: scale(1.05); }
+
+    .demo-watermark {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 200;
+      background: #042f2e;
+      border: 1px solid var(--teal-accent);
+      color: #5eead4;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 8px 16px;
+      border-radius: 30px;
+      box-shadow: var(--shadow-md);
+      backdrop-filter: blur(10px);
+    }
+
+    /* ── RESPONSIVE ADAPTATIONS ── */
+    @media (max-width: 1024px) {
+      .hero-container { grid-template-columns: 1fr; gap: 3rem; }
+      .case-display-grid { grid-template-columns: 1fr; }
+      .metrics-container { grid-template-columns: repeat(2, 1fr); }
+      .procedures-grid { grid-template-columns: repeat(2, 1fr); }
+      .tech-grid { grid-template-columns: repeat(2, 1fr); }
+      .doctors-grid { grid-template-columns: 1fr; }
+      .reviews-grid { grid-template-columns: 1fr; }
+      .footer-container { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      nav, .topbar, .hero, .metrics-strip, .evidence-section, .directory-section, .tech-section, .doctors-section, .booking-section, .reviews-section, footer {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
+      .topbar { display: none; }
+      .nav-links { display: none; }
+      .hero-main-card img { height: 360px; }
+      .case-images-duo { grid-template-columns: 1fr; }
+      .case-img-card { height: 260px; }
+      .procedures-grid { grid-template-columns: 1fr; }
+      .tech-grid { grid-template-columns: 1fr; }
+      .doctor-card-elevated { flex-direction: column; }
+      .doctor-img-col { width: 100%; height: 240px; }
+      .form-grid-layout { grid-template-columns: 1fr; }
+      .form-col-full { grid-column: span 1; }
+      .footer-container { grid-template-columns: 1fr; }
+      .hero-float-review { position: static; margin-top: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP STATUS STRIP -->
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="status-live">Doctors On Duty Today</span>
+      <span>📍 Road No. 36, Jubilee Hills (Opp. Metro Pillar 1675)</span>
+      <span>⏰ Mon – Sat: 9:30 AM – 8:30 PM</span>
+    </div>
+    <div class="topbar-right">
+      <a href="tel:+914048529000">📞 040-4852-9000</a>
+      <a href="https://wa.me/919121044889" target="_blank">💬 WhatsApp Concierge</a>
+      <span>⭐ 4.96 (540+ Google Reviews)</span>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header>
+    <nav>
+      <a href="#" class="brand-wrap">
+        <div class="brand-text">
+          <span class="brand-name">AURA</span>
+          <span class="brand-tag">Aesthetics & Dental Sanctuary</span>
+        </div>
+      </a>
+
+      <div class="nav-links">
+        <a href="#evidence">Results & Evidence</a>
+        <a href="#procedures">Clinical Treatments</a>
+        <a href="#technology">US-FDA Tech</a>
+        <a href="#specialists">Senior Faculty</a>
+        <a href="#reviews">Patient Reviews</a>
+      </div>
+
+      <div class="nav-action-group">
+        <a href="https://wa.me/919121044889" class="btn-nav-wa" target="_blank">
+          <span>💬</span> Chat With Clinic
+        </a>
+        <a href="#book" class="btn-nav-book">Book Consultation</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="hero-container">
+      <div class="hero-content">
+        <div class="hero-accreditation">
+          <span class="hero-accreditation-badge">NABH ACCREDITED</span>
+          <span class="hero-accreditation-text">Jubilee Hills Centre of Clinical Excellence</span>
+        </div>
+
+        <h1>
+          Where medical precision reveals your <span class="highlight">truest radiance</span>.
+        </h1>
+
+        <p class="hero-lead">
+          Bespoke cosmetic dermatology, laser skin restoration, and computer-guided smile design. Led by AIIMS & UK Royal College certified clinicians with zero-downtime protocols.
+        </p>
+
+        <!-- Interactive Quick Concern Router -->
+        <div class="concern-bar">
+          <span class="concern-icon">✦</span>
+          <select id="quickConcern" class="concern-selector" onchange="autoJumpConcern()">
+            <option value="">What concern would you like to treat?</option>
+            <option value="derma">Acne Scars & Deep Pigmentation (Pico Laser)</option>
+            <option value="dental">Invisalign® Smile Architecture (3D Trios)</option>
+            <option value="antiaging">Jawline & Facial Volume Restructuring (Fillers)</option>
+            <option value="facials">HydraFacial Elite® MD Deep Radiance</option>
+            <option value="hair">GFC & Exosome Hair Regrowth Therapy</option>
+          </select>
+          <button class="btn-concern-go" onclick="autoJumpConcern()">View Protocol →</button>
+        </div>
+
+        <!-- Doctor Trust Stack -->
+        <div class="hero-doctor-trust">
+          <div class="doctor-avatars">
+            <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=150&q=80" alt="Dr Radhika Rao" />
+            <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=150&q=80" alt="Dr Vikram Varma" />
+          </div>
+          <div class="doctor-trust-info">
+            <strong>Led by AIIMS Gold Medalists & UK Fellows</strong>
+            <span>14+ years experience · 14,800+ documented transformations</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="hero-main-card">
+          <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1000&q=80" alt="Aura Clinic Jubilee Hills Modern Operatory" />
+          <div class="hero-img-gradient"></div>
+        </div>
+
+        <!-- Floating Live Tech Badge -->
+        <div class="hero-float-tech">
+          <div class="tech-pill-dot"></div>
+          <span>100% US-FDA Cleared Laser Suites</span>
+        </div>
+
+        <!-- Floating Google Review Card -->
+        <div class="hero-float-review">
+          <div class="review-google-icon">G</div>
+          <div class="review-meta">
+            <strong>Google Verified Sanctuary</strong>
+            <div class="review-stars">★★★★★</div>
+            <span>4.96/5.0 from 540+ patient experiences</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- METRICS STRIP -->
+  <section class="metrics-strip">
+    <div class="metrics-container">
+      <div class="metric-box">
+        <div class="metric-number">14,800+</div>
+        <div class="metric-label">Completed Procedures</div>
+        <div class="metric-sub">Dermatology, laser & digital dental transformations</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-number">100%</div>
+        <div class="metric-label">US-FDA Certified Platforms</div>
+        <div class="metric-sub">Lumenis, Alma, 3Shape & HydraFacial systems</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-number">4.96★</div>
+        <div class="metric-label">Patient Rating</div>
+        <div class="metric-sub">Consistently ranked #1 in Jubilee Hills & Banjara Hills</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-number">&lt; 10 min</div>
+        <div class="metric-label">Average Wait Time</div>
+        <div class="metric-sub">Strict private appointments with zero crowded waiting</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EVIDENCE & RESULTS SHOWCASE -->
+  <section class="evidence-section" id="evidence">
+    <div class="section-head-split">
+      <div>
+        <span class="section-eyebrow">Documented Clinical Evidence</span>
+        <h2 class="section-title">Measurable, natural results.</h2>
+        <p class="section-subtitle">
+          Real cases treated in our Jubilee Hills clinic. We focus on conservative enhancement that restores natural contours rather than overdone artificiality.
+        </p>
+      </div>
+
+      <!-- Case switcher tabs -->
+      <div class="case-nav-pills">
+        <button class="case-pill-btn active" onclick="switchCase(0, this)">Melasma Pigmentation</button>
+        <button class="case-pill-btn" onclick="switchCase(1, this)">Digital Smile Design</button>
+        <button class="case-pill-btn" onclick="switchCase(2, this)">Acne Scar Resurfacing</button>
+      </div>
+    </div>
+
+    <!-- Case Display Card -->
+    <div class="case-display-grid" id="caseDisplay">
+      <div class="case-images-duo">
+        <div class="case-img-card">
+          <img id="caseImgBefore" src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=700&q=80" alt="Clinical Before" />
+          <span class="case-badge-pill">Baseline (Day 0)</span>
+        </div>
+        <div class="case-img-card">
+          <img id="caseImgAfter" src="https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?auto=format&fit=crop&w=700&q=80" alt="Clinical After" />
+          <span class="case-badge-pill case-badge-after">Result (Week 8)</span>
+        </div>
+      </div>
+
+      <div class="case-details-panel">
+        <span class="case-protocol-tag" id="caseTag">Protocol: PicoSure™ Dual-Pulse + Medical Antioxidant Infusion</span>
+        <h3 id="caseTitle">Recalcitrant Melasma & Sun Damage Clearance</h3>
+        <p class="case-body-text" id="caseDesc">
+          Patient presented with 4-year stubborn dermal melasma unresponsive to topical agents. Treated with picosecond acoustic shockwave therapy targeting pigment clusters without epidermal heat injury.
+        </p>
+
+        <div class="case-metrics-grid">
+          <div class="case-metric-item">
+            <strong id="caseSessions">4 Sessions</strong>
+            <span>Protocol Duration</span>
+          </div>
+          <div class="case-metric-item">
+            <strong id="caseDowntime">Zero Hours</strong>
+            <span>Social Downtime</span>
+          </div>
+          <div class="case-metric-item">
+            <strong id="caseDoctor">Dr. Radhika Rao</strong>
+            <span>Lead Clinician</span>
+          </div>
+        </div>
+
+        <div class="case-cta-row">
+          <a href="#book" class="btn-nav-book">Schedule Assessment For This Protocol</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCEDURES DIRECTORY -->
+  <section class="directory-section" id="procedures">
+    <div class="directory-container">
+      <div class="directory-header">
+        <span class="section-eyebrow">Comprehensive Menu</span>
+        <h2 class="section-title">Specialist Clinical Protocols</h2>
+        <p class="section-subtitle">
+          Transparent pricing, exact session times, and verified clinical machinery. No hidden costs.
+        </p>
+      </div>
+
+      <!-- Category Filter Bar -->
+      <div class="category-filter-bar">
+        <button class="filter-btn active" onclick="filterCategory('all', this)">All Procedures (6)</button>
+        <button class="filter-btn" onclick="filterCategory('derma', this)">Dermatology & Skin</button>
+        <button class="filter-btn" onclick="filterCategory('dental', this)">Cosmetic Dentistry</button>
+        <button class="filter-btn" onclick="filterCategory('antiaging', this)">Anti-Aging & Fillers</button>
+      </div>
+
+      <!-- Procedures Cards -->
+      <div class="procedures-grid">
+
+        <!-- Card 1 -->
+        <div class="procedure-card" data-category="derma">
+          <div class="procedure-img-wrap">
+            <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=700&q=80" alt="HydraFacial Elite MD" />
+            <span class="procedure-device-badge">HydraFacial Elite® MD</span>
+          </div>
+          <div class="procedure-body">
+            <span class="procedure-dept">Dermatology</span>
+            <h3 class="procedure-title">HydraFacial Elite® Medical Glow</h3>
+            <p class="procedure-desc">
+              Patented vortex extraction with medical peptides and hyaluronic hydration. Clears blackheads, shrinks pores, and provides immediate event-ready glow.
+            </p>
+            <div class="procedure-spec-row">
+              <span class="spec-item"><span class="spec-bullet">⏱</span> 60 Mins</span>
+              <span class="spec-item"><span class="spec-bullet">✓</span> Zero Downtime</span>
+              <span class="spec-item"><span class="spec-bullet">🛡️</span> US-FDA</span>
+            </div>
+            <div class="procedure-footer">
+              <div>
+                <span class="procedure-fee-label">Session Fee</span>
+                <div class="procedure-price">₹6,500</div>
+              </div>
+              <button class="btn-card-book" onclick="quickBookSelect('HydraFacial Elite MD')">Book Slot →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="procedure-card" data-category="dental">
+          <div class="procedure-img-wrap">
+            <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=700&q=80" alt="Invisalign Aligners" />
+            <span class="procedure-device-badge">3Shape TRIOS 5™ Wireless</span>
+          </div>
+          <div class="procedure-body">
+            <span class="procedure-dept">Aesthetic Dentistry</span>
+            <h3 class="procedure-title">Invisalign® Clear Smile Aligners</h3>
+            <p class="procedure-desc">
+              Painless, invisible orthodontic aligners engineered via 3D digital oral scanning. Straighten teeth discreetly without wire brackets or dietary restrictions.
+            </p>
+            <div class="procedure-spec-row">
+              <span class="spec-item"><span class="spec-bullet">⏱</span> 30 Min Scan</span>
+              <span class="spec-item"><span class="spec-bullet">✓</span> 3D Smile Preview</span>
+              <span class="spec-item"><span class="spec-bullet">💎</span> Platinum Tier</span>
+            </div>
+            <div class="procedure-footer">
+              <div>
+                <span class="procedure-fee-label">Initial Consultation</span>
+                <div class="procedure-price">₹1,500</div>
+              </div>
+              <button class="btn-card-book" onclick="quickBookSelect('Invisalign 3D Smile Scan')">Book Slot →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="procedure-card" data-category="derma">
+          <div class="procedure-img-wrap">
+            <img src="https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?auto=format&fit=crop&w=700&q=80" alt="Laser Skin Resurfacing" />
+            <span class="procedure-device-badge">Lumenis Stellar M22™</span>
+          </div>
+          <div class="procedure-body">
+            <span class="procedure-dept">Laser Dermatology</span>
+            <h3 class="procedure-title">Stellar M22™ Photofacial & ResurFX</h3>
+            <p class="procedure-desc">
+              Multi-sequential laser pulses targeting broken capillaries, redness, acne scars, and irregular dermal texture while triggering natural neocollagenesis.
+            </p>
+            <div class="procedure-spec-row">
+              <span class="spec-item"><span class="spec-bullet">⏱</span> 45 Mins</span>
+              <span class="spec-item"><span class="spec-bullet">✓</span> 24h Mild Flush</span>
+              <span class="spec-item"><span class="spec-bullet">🛡️</span> US-FDA</span>
+            </div>
+            <div class="procedure-footer">
+              <div>
+                <span class="procedure-fee-label">Per Session</span>
+                <div class="procedure-price">₹8,500</div>
+              </div>
+              <button class="btn-card-book" onclick="quickBookSelect('M22 Photofacial Laser')">Book Slot →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="procedure-card" data-category="dental">
+          <div class="procedure-img-wrap">
+            <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=700&q=80" alt="Porcelain Veneers" />
+            <span class="procedure-device-badge">Ivoclar Vivadent E-Max®</span>
+          </div>
+          <div class="procedure-body">
+            <span class="procedure-dept">Cosmetic Dental</span>
+            <h3 class="procedure-title">Porcelain E-Max® Veneers</h3>
+            <p class="procedure-desc">
+              Hand-layered lithium disilicate ceramic shells (0.3mm ultra-thin) custom crafted to correct chipped, gapped, or permanently stained teeth with natural translucency.
+            </p>
+            <div class="procedure-spec-row">
+              <span class="spec-item"><span class="spec-bullet">⏱</span> 2 Visits</span>
+              <span class="spec-item"><span class="spec-bullet">✓</span> 15-Yr Warranty</span>
+              <span class="spec-item"><span class="spec-bullet">✨</span> Handcrafted</span>
+            </div>
+            <div class="procedure-footer">
+              <div>
+                <span class="procedure-fee-label">From / Unit</span>
+                <div class="procedure-price">₹14,500</div>
+              </div>
+              <button class="btn-card-book" onclick="quickBookSelect('Porcelain E-Max Veneers')">Book Slot →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="procedure-card" data-category="antiaging">
+          <div class="procedure-img-wrap">
+            <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=700&q=80" alt="Dermal Profiling" />
+            <span class="procedure-device-badge">Juvéderm® & Restylane®</span>
+          </div>
+          <div class="procedure-body">
+            <span class="procedure-dept">Injectables</span>
+            <h3 class="procedure-title">Hyaluronic Facial Profiling & Fillers</h3>
+            <p class="procedure-desc">
+              Subtle, micro-aliquot volume restoration for hollow tear troughs, cheek definition, and jawline contouring using premium cross-linked hyaluronic gels.
+            </p>
+            <div class="procedure-spec-row">
+              <span class="spec-item"><span class="spec-bullet">⏱</span> 40 Mins</span>
+              <span class="spec-item"><span class="spec-bullet">✓</span> Zero Social Downtime</span>
+              <span class="spec-item"><span class="spec-bullet">💉</span> Micro-Cannula</span>
+            </div>
+            <div class="procedure-footer">
+              <div>
+                <span class="procedure-fee-label">From / 1.0ml</span>
+                <div class="procedure-price">₹19,000</div>
+              </div>
+              <button class="btn-card-book" onclick="quickBookSelect('Facial Profiling Fillers')">Book Slot →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 6 -->
+        <div class="procedure-card" data-category="dental">
+          <div class="procedure-img-wrap">
+            <img src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&w=700&q=80" alt="Philips Zoom Whitening" />
+            <span class="procedure-device-badge">Philips Zoom!® WhiteSpeed</span>
+          </div>
+          <div class="procedure-body">
+            <span class="procedure-dept">Instant Cosmetic Dental</span>
+            <h3 class="procedure-title">Philips Zoom!® In-Chair Whitening</h3>
+            <p class="procedure-desc">
+              Clinical blue LED accelerated whitening with amorphous calcium phosphate (ACP) to brighten teeth up to 8 shades lighter in a single comfortable 60-minute session.
+            </p>
+            <div class="procedure-spec-row">
+              <span class="spec-item"><span class="spec-bullet">⏱</span> 60 Mins</span>
+              <span class="spec-item"><span class="spec-bullet">✓</span> Zero Enamel Damage</span>
+              <span class="spec-item"><span class="spec-bullet">⚡</span> Same Day</span>
+            </div>
+            <div class="procedure-footer">
+              <div>
+                <span class="procedure-fee-label">Complete Protocol</span>
+                <div class="procedure-price">₹12,000</div>
+              </div>
+              <button class="btn-card-book" onclick="quickBookSelect('Philips Zoom Whitening')">Book Slot →</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- TECHNOLOGY & STERILIZATION STANDARDS -->
+  <section class="tech-section" id="technology">
+    <div style="text-align: center; max-width: 720px; margin: 0 auto;">
+      <span class="section-eyebrow">Medical Rigor</span>
+      <h2 class="section-title">Hospital-grade safety & world-class tech.</h2>
+      <p class="section-subtitle">
+        We invest heavily in original medical hardware directly imported from Germany, Israel, and the United States. No unbranded Chinese knockoffs.
+      </p>
+    </div>
+
+    <div class="tech-grid">
+      <div class="tech-card">
+        <div class="tech-icon-box">⚡</div>
+        <span class="tech-platform">Laser Dermatology</span>
+        <h4>Lumenis Stellar M22™</h4>
+        <p>The global gold standard in selective photothermolysis. Treats 30+ skin conditions with continuous contact sapphire cooling for pain-free safety on Indian melanin.</p>
+      </div>
+
+      <div class="tech-card">
+        <div class="tech-icon-box">🦷</div>
+        <span class="tech-platform">Digital Dentistry</span>
+        <h4>3Shape TRIOS 5™</h4>
+        <p>Ultra-fast intraoral 3D scanner capturing 2,400 color photographs per second. Replaces gooey impression trays with a 100% digital, zero-gagging digital smile replica.</p>
+      </div>
+
+      <div class="tech-card">
+        <div class="tech-icon-box">🛡️</div>
+        <span class="tech-platform">Infection Control</span>
+        <h4>Class-B 7-Stage Autoclave</h4>
+        <p>European standard vacuum sterilization ensuring 100% eradication of bacterial spores and viruses on every single dental handpiece and surgical instrument.</p>
+      </div>
+
+      <div class="tech-card">
+        <div class="tech-icon-box">✦</div>
+        <span class="tech-platform">Painless Epilation</span>
+        <h4>Alma Soprano Titanium™</h4>
+        <p>Triple wavelength (755nm, 810nm, 1064nm) simultaneous diode laser providing rapid, permanent hair reduction with ICE Plus™ continuous epidermal freezing.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MEDICAL FACULTY (DOCTORS) -->
+  <section class="doctors-section" id="specialists">
+    <div class="doctors-container">
+      <div style="text-align: center; max-width: 720px; margin: 0 auto;">
+        <span class="section-eyebrow">Clinical Authority</span>
+        <h2 class="section-title">Consult with Senior Specialists</h2>
+        <p class="section-subtitle">
+          At Aura, you will never be treated by non-certified technicians. Every consultation, injectable, and surgical procedure is performed personally by fellowship-trained doctors.
+        </p>
+      </div>
+
+      <div class="doctors-grid">
+
+        <!-- Doctor 1 -->
+        <div class="doctor-card-elevated">
+          <div class="doctor-img-col">
+            <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=700&q=80" alt="Dr. Radhika Rao" />
+            <span class="doctor-badge-chip">Chief Dermatologist</span>
+          </div>
+          <div class="doctor-info-col">
+            <span class="doctor-sub-dept">Cosmetic Dermatology & Laser Medicine</span>
+            <h3 class="doctor-name-title">Dr. Radhika Rao</h3>
+            <div class="doctor-degree">
+              MBBS, MD Dermatology (AIIMS New Delhi)<br />
+              Fellow, British College of Aesthetic Medicine (London)
+            </div>
+            <p class="doctor-narrative">
+              Over 14 years specializing in complex dermal hyperpigmentation, ethnic melasma protocols, and conservative micro-droplet facial volume restructuring. Formerly Senior Consultant at Harley Street, London.
+            </p>
+            <div class="doctor-available-strip">
+              <span>🟢 Available: Mon, Wed, Fri & Sat (Jubilee Hills)</span>
+            </div>
+            <button class="btn-select-doctor" onclick="selectDoctor('Dr. Radhika Rao (Chief Dermatologist)')">
+              Book with Dr. Radhika →
+            </button>
+          </div>
+        </div>
+
+        <!-- Doctor 2 -->
+        <div class="doctor-card-elevated">
+          <div class="doctor-img-col">
+            <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=700&q=80" alt="Dr. Vikram Varma" />
+            <span class="doctor-badge-chip">Aesthetic Dental Director</span>
+          </div>
+          <div class="doctor-info-col">
+            <span class="doctor-sub-dept">Digital Prosthodontics & Implantology</span>
+            <h3 class="doctor-name-title">Dr. Vikram Varma</h3>
+            <div class="doctor-degree">
+              BDS, MDS Prosthodontics<br />
+              Invisalign® Platinum Certified Provider · Member AACD (USA)
+            </div>
+            <p class="doctor-narrative">
+              Pioneer in digital smile design in Hyderabad with over 2,800 successful smile transformations. Known for ultra-conservative porcelain laminates and computer-guided painless implantology.
+            </p>
+            <div class="doctor-available-strip">
+              <span>🟢 Available: Tue, Thu, Fri & Sat (Jubilee Hills)</span>
+            </div>
+            <button class="btn-select-doctor" onclick="selectDoctor('Dr. Vikram Varma (Aesthetic Dentist)')">
+              Book with Dr. Vikram →
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- APPOINTMENT CONCIERGE WIDGET -->
+  <section class="booking-section" id="book">
+    <div class="booking-wrapper">
+      <div class="booking-header-bar">
+        <span style="font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #5eead4; display: block; margin-bottom: 6px;">Direct Clinical Calendar</span>
+        <h2>Reserve Your Private Consultation</h2>
+        <p>Select your desired specialty and time window. Instant WhatsApp and SMS appointment token dispatched immediately.</p>
+      </div>
+
+      <!-- Booking Form -->
+      <form id="clinicBookingForm" class="booking-inner-form" onsubmit="handleClinicalBooking(event)">
+        <div class="form-grid-layout">
+
+          <div class="form-field-group">
+            <label for="fName">Patient Full Name *</label>
+            <input type="text" id="fName" class="form-field-control" placeholder="e.g. Ananya Reddy" required />
+          </div>
+
+          <div class="form-field-group">
+            <label for="fPhone">WhatsApp Number (For Instant Token) *</label>
+            <input type="tel" id="fPhone" class="form-field-control" placeholder="+91 98480 12345" required />
+          </div>
+
+          <div class="form-field-group">
+            <label for="fDept">Clinical Specialty *</label>
+            <select id="fDept" class="form-field-control" required onchange="handleDeptChange()">
+              <option value="Dermatology">Cosmetic Dermatology & Melasma</option>
+              <option value="Dental">Cosmetic Dentistry & Smile Design</option>
+              <option value="Laser">US-FDA Laser Resurfacing</option>
+              <option value="AntiAging">Facial Contouring & Fillers</option>
+              <option value="HydraFacial">HydraFacial Elite MD</option>
+            </select>
+          </div>
+
+          <div class="form-field-group">
+            <label for="fDoctor">Preferred Specialist *</label>
+            <select id="fDoctor" class="form-field-control" required>
+              <option value="Dr. Radhika Rao (Chief Dermatologist)">Dr. Radhika Rao (Chief Dermatologist - AIIMS)</option>
+              <option value="Dr. Vikram Varma (Aesthetic Dentist)">Dr. Vikram Varma (Aesthetic Dental Director)</option>
+              <option value="Next Available Senior Specialist">Next Available Senior Specialist</option>
+            </select>
+          </div>
+
+          <div class="form-field-group">
+            <label for="fDate">Preferred Date *</label>
+            <input type="date" id="fDate" class="form-field-control" required />
+          </div>
+
+          <div class="form-field-group">
+            <span class="time-slot-label">Select Preferred Consultation Slot *</span>
+            <div class="slot-chips-row">
+              <div class="slot-chip selected" onclick="pickSlot('10:30 AM', this)">10:30 AM</div>
+              <div class="slot-chip" onclick="pickSlot('11:45 AM', this)">11:45 AM</div>
+              <div class="slot-chip" onclick="pickSlot('02:30 PM', this)">02:30 PM</div>
+              <div class="slot-chip" onclick="pickSlot('04:15 PM', this)">04:15 PM</div>
+              <div class="slot-chip" onclick="pickSlot('06:00 PM', this)">06:00 PM</div>
+            </div>
+            <input type="hidden" id="selectedTimeSlot" value="10:30 AM" />
+          </div>
+
+          <div class="form-col-full">
+            <button type="submit" class="booking-cta-btn">Confirm Consultation Request →</button>
+            <div class="booking-guarantee-note">
+              <span>🔒 100% Patient Medical Confidentiality</span>
+              <span>·</span>
+              <span>🚗 Complimentary Valet Parking on Road 36</span>
+            </div>
+          </div>
+
+        </div>
+      </form>
+
+      <!-- Booking Confirmed State -->
+      <div id="bookingConfirmedBox" class="booking-confirmed-card">
+        <div class="confirmed-icon-circle">✓</div>
+        <h3 class="confirmed-title">Appointment Reserved Successfully</h3>
+        <span class="confirmed-ref-pill" id="confirmToken">TOKEN: AUR-2026-JH884</span>
+
+        <p style="color: var(--text-muted); font-size: 0.95rem; max-width: 520px; margin: 0 auto 1.5rem;">
+          Thank you, <strong id="confPatientName" style="color: var(--text-main);"></strong>. Your consultation with <strong id="confDoctorName" style="color: var(--teal-primary);"></strong> has been registered on our hospital calendar.
+        </p>
+
+        <!-- Simulated WhatsApp message card -->
+        <div class="whatsapp-simulation-box">
+          <div class="wa-sim-head">
+            <span>💬 WhatsApp Dispatch Sent to <strong id="confPhone"></strong></span>
+          </div>
+          <div>
+            "Hello <span id="waName"></span>! Your private consultation at <strong>Aura Aesthetics & Dental Sanctuary (Road No. 36 Jubilee Hills)</strong> is scheduled for <strong id="waDate"></strong> at <strong id="waTime"></strong> with <span id="waDoc"></span>.<br/><br/>
+            📍 Location: Plot 412, Rd 36 (Valet Parking Available)<br/>
+            📞 Helpline: 040-4852-9000. See you soon!"
+          </div>
+        </div>
+
+        <button onclick="resetClinicalBooking()" class="btn-card-book" style="padding: 0.75rem 1.8rem;">
+          Book Another Patient Consultation
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PATIENT REVIEWS & ACCREDITATION -->
+  <section class="reviews-section" id="reviews">
+    <div style="text-align: center; max-width: 720px; margin: 0 auto;">
+      <span class="section-eyebrow">Patient Voices</span>
+      <h2 class="section-title">Trusted by Hyderabad's most discerning.</h2>
+      <p class="section-subtitle">
+        Over 540 verified 5-star reviews across Google, Practo, and Lybrate.
+      </p>
+    </div>
+
+    <div class="reviews-grid">
+      <div class="review-card-elevated">
+        <div class="review-card-top">
+          <div class="review-stars-gold">★★★★★</div>
+          <p class="review-card-text">
+            "I had been battling melasma post-pregnancy for nearly 3 years. Dr. Radhika's combination of Pico laser and medical peeling cleared 85% of my spots in just 3 sessions. The clinic feels like a 5-star spa in Zurich."
+          </p>
+        </div>
+        <div class="review-author-strip">
+          <div class="author-initials">SR</div>
+          <div class="author-details">
+            <strong>Samyuktha Reddy</strong>
+            <span>Jubilee Hills · Melasma Laser Patient</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card-elevated">
+        <div class="review-card-top">
+          <div class="review-stars-gold">★★★★★</div>
+          <p class="review-card-text">
+            "Dr. Vikram did my digital smile makeover with Invisalign and 4 E-Max veneers. What blew me away was seeing the exact 3D render of my final smile before any tooth was touched. Zero pain, zero hassle."
+          </p>
+        </div>
+        <div class="review-author-strip">
+          <div class="author-initials">AK</div>
+          <div class="author-details">
+            <strong>Aditya Kothari</strong>
+            <span>Gachibowli · Digital Smile Architecture</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card-elevated">
+        <div class="review-card-top">
+          <div class="review-stars-gold">★★★★★</div>
+          <p class="review-card-text">
+            "No waiting, pristine sterilization, and total transparency on pricing. Got their HydraFacial Elite before my sister's wedding—the glow lasted well over a month. Highly recommended."
+          </p>
+        </div>
+        <div class="review-author-strip">
+          <div class="author-initials">PN</div>
+          <div class="author-details">
+            <strong>Pooja Nambiar</strong>
+            <span>Banjara Hills · HydraFacial MD</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-brand">
+        <h3>AURA SANCTUARY</h3>
+        <p>
+          Hyderabad's premier centre for cosmetic dermatology, regenerative laser medicine, and digital smile architecture.
+        </p>
+        <div style="font-size: 0.82rem; color: #5eead4; font-weight: 600;">
+          📍 Plot 412, Road No. 36, Jubilee Hills, Hyderabad 500033
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h5>Departments</h5>
+        <ul>
+          <li><a href="#procedures">Cosmetic Dermatology</a></li>
+          <li><a href="#procedures">Aesthetic Dentistry</a></li>
+          <li><a href="#procedures">Laser Hair Reduction</a></li>
+          <li><a href="#procedures">Anti-Aging & Fillers</a></li>
+          <li><a href="#procedures">Medical Facials</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5>Clinic Hours</h5>
+        <ul>
+          <li>Monday – Friday: 9:30 AM – 8:30 PM</li>
+          <li>Saturday: 9:30 AM – 7:30 PM</li>
+          <li>Sunday: By Prior VIP Appointment</li>
+          <li>Valet Parking: Available at Porch</li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5>Direct Helplines</h5>
+        <ul>
+          <li><a href="tel:+914048529000">Desk: 040-4852-9000</a></li>
+          <li><a href="https://wa.me/919121044889">WhatsApp: +91 91210 44889</a></li>
+          <li>Emergency Dental: +91 98480 99221</li>
+          <li>NABH Reg: HYD-NABH-2024-88</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>© 2026 AURA Aesthetics & Dental Sanctuary Pvt Ltd. All rights reserved.</div>
+      <div>Accredited Medical Center · Designed with Swiss Clinical Precision</div>
+    </div>
+  </footer>
+
+  <!-- FLOATING WA & DEMO WATERMARK -->
+  <a href="https://wa.me/919121044889" class="floating-wa-btn" target="_blank">
+    <span>💬</span> WhatsApp Direct
+  </a>
+
+  <div class="demo-watermark">Demo by DSP</div>
+
+  <!-- SCRIPT LOGIC -->
+  <script>
+    // 1. Evidence Case Switcher Data
+    const clinicalCases = [
+      {
+        tag: "Protocol: PicoSure™ Dual-Pulse + Medical Antioxidant Infusion",
+        title: "Recalcitrant Melasma & Sun Damage Clearance",
+        desc: "Patient presented with 4-year stubborn dermal melasma unresponsive to topical agents. Treated with picosecond acoustic shockwave therapy targeting pigment clusters without epidermal heat injury.",
+        sessions: "4 Sessions",
+        downtime: "Zero Hours",
+        doctor: "Dr. Radhika Rao",
+        imgBefore: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=700&q=80",
+        imgAfter: "https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?auto=format&fit=crop&w=700&q=80"
+      },
+      {
+        tag: "Protocol: 3Shape 3D Trios + 6-Unit E-Max Laminates",
+        title: "Digital Smile Re-Architecture & Gap Closure",
+        desc: "Severe midline diastema with genetic enamel hypoplasia. Digitally modeled via 3D intraoral mapping and resolved with ultra-thin 0.3mm lithium disilicate porcelain veneers.",
+        sessions: "2 Visits",
+        downtime: "Instant",
+        doctor: "Dr. Vikram Varma",
+        imgBefore: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=700&q=80",
+        imgAfter: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=700&q=80"
+      },
+      {
+        tag: "Protocol: Lumenis Stellar M22™ Fractional ResurFX",
+        title: "Deep Icepick & Boxcar Acne Scar Remodeling",
+        desc: "Atrophic post-acne scarring across bilateral cheeks. Fractional non-ablative laser pulses stimulated deep structural collagen formation without crusting or post-inflammatory hyperpigmentation.",
+        sessions: "3 Sessions",
+        downtime: "24h Pinkness",
+        doctor: "Dr. Radhika Rao",
+        imgBefore: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=700&q=80",
+        imgAfter: "https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&w=700&q=80"
+      }
+    ];
+
+    function switchCase(index, btn) {
+      document.querySelectorAll('.case-pill-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const c = clinicalCases[index];
+      document.getElementById('caseTag').textContent = c.tag;
+      document.getElementById('caseTitle').textContent = c.title;
+      document.getElementById('caseDesc').textContent = c.desc;
+      document.getElementById('caseSessions').textContent = c.sessions;
+      document.getElementById('caseDowntime').textContent = c.downtime;
+      document.getElementById('caseDoctor').textContent = c.doctor;
+      document.getElementById('caseImgBefore').src = c.imgBefore;
+      document.getElementById('caseImgAfter').src = c.imgAfter;
+    }
+
+    // 2. Category Filter
+    function filterCategory(cat, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const cards = document.querySelectorAll('.procedure-card');
+      cards.forEach(card => {
+        if (cat === 'all' || card.dataset.category === cat) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // 3. Auto Concern Jump
+    function autoJumpConcern() {
+      const select = document.getElementById('quickConcern');
+      const val = select.value;
+      if (!val) return;
+
+      const filterBtn = Array.from(document.querySelectorAll('.filter-btn')).find(b => {
+        const text = b.getAttribute('onclick') || '';
+        return text.includes(`'${val}'`);
+      });
+
+      if (filterBtn) {
+        filterBtn.click();
+      }
+
+      const procSection = document.getElementById('procedures');
+      if (procSection) {
+        procSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    // 4. Quick book from card
+    function quickBookSelect(procedureName) {
+      const deptSelect = document.getElementById('fDept');
+      if (procedureName.includes('Veneer') || procedureName.includes('Invisalign') || procedureName.includes('Whitening')) {
+        deptSelect.value = 'Dental';
+        document.getElementById('fDoctor').value = 'Dr. Vikram Varma (Aesthetic Dentist)';
+      } else {
+        deptSelect.value = 'Dermatology';
+        document.getElementById('fDoctor').value = 'Dr. Radhika Rao (Chief Dermatologist)';
+      }
+
+      const bookSec = document.getElementById('book');
+      bookSec.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // 5. Select doctor from faculty card
+    function selectDoctor(docName) {
+      const docSelect = document.getElementById('fDoctor');
+      if (docSelect) {
+        docSelect.value = docName;
+      }
+      const deptSelect = document.getElementById('fDept');
+      if (docName.includes('Dental')) {
+        deptSelect.value = 'Dental';
+      } else {
+        deptSelect.value = 'Dermatology';
+      }
+
+      document.getElementById('book').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function handleDeptChange() {
+      const dept = document.getElementById('fDept').value;
+      const doc = document.getElementById('fDoctor');
+      if (dept === 'Dental') {
+        doc.value = 'Dr. Vikram Varma (Aesthetic Dentist)';
+      } else {
+        doc.value = 'Dr. Radhika Rao (Chief Dermatologist)';
+      }
+    }
+
+    // 6. Slot Picker
+    function pickSlot(time, el) {
+      document.querySelectorAll('.slot-chip').forEach(c => c.classList.remove('selected'));
+      el.classList.add('selected');
+      document.getElementById('selectedTimeSlot').value = time;
+    }
+
+    // 7. Date Init
+    const dateField = document.getElementById('fDate');
+    if (dateField) {
+      const today = new Date().toISOString().split('T')[0];
+      dateField.min = today;
+      dateField.value = today;
+    }
+
+    // 8. Booking Submission simulation
+    function handleClinicalBooking(e) {
+      e.preventDefault();
+      const name = document.getElementById('fName').value;
+      const phone = document.getElementById('fPhone').value;
+      const doc = document.getElementById('fDoctor').value;
+      const date = document.getElementById('fDate').value;
+      const slot = document.getElementById('selectedTimeSlot').value;
+
+      const randomToken = 'AUR-2026-JH' + Math.floor(100 + Math.random() * 900);
+      document.getElementById('confirmToken').textContent = 'APPOINTMENT TOKEN: ' + randomToken;
+      document.getElementById('confPatientName').textContent = name;
+      document.getElementById('confDoctorName').textContent = doc;
+      document.getElementById('confPhone').textContent = phone;
+
+      document.getElementById('waName').textContent = name;
+      document.getElementById('waDate').textContent = date;
+      document.getElementById('waTime').textContent = slot;
+      document.getElementById('waDoc').textContent = doc;
+
+      document.getElementById('clinicBookingForm').style.display = 'none';
+      document.getElementById('bookingConfirmedBox').style.display = 'block';
+    }
+
+    function resetClinicalBooking() {
+      document.getElementById('clinicBookingForm').reset();
+      const today = new Date().toISOString().split('T')[0];
+      document.getElementById('fDate').value = today;
+      document.getElementById('clinicBookingForm').style.display = 'block';
+      document.getElementById('bookingConfirmedBox').style.display = 'none';
+    }
+  </script>
+</body>
+</html>
