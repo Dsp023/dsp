@@ -63,32 +63,20 @@ export function Contact() {
             <a
               href={`mailto:${SITE.email}`}
               id="contact-email"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '10px',
-                padding: '1rem 1.5rem',
-                background: 'var(--white)',
-                color: 'var(--bg)',
-                fontSize: '0.9rem',
-                fontWeight: 500,
-                borderRadius: '2px',
-                alignSelf: 'flex-start',
-                transition: 'opacity 0.2s ease',
-              }}
+              className="contact-cta-button"
               onMouseEnter={e => (e.currentTarget.style.opacity = '0.88')}
               onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
             >
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" style={{ flexShrink: 0 }}>
                 <rect x="1" y="3" width="14" height="10" rx="1.5" stroke="currentColor" strokeWidth="1.3" />
                 <path d="M1 5l7 5 7-5" stroke="currentColor" strokeWidth="1.3" strokeLinejoin="round" />
               </svg>
-              {SITE.email}
+              <span>{SITE.email}</span>
             </a>
 
             {/* Social links */}
             {links.length > 0 && (
-              <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center', flexWrap: 'wrap' }}>
+              <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap', marginTop: '0.5rem' }}>
                 {links.map(({ label, href }) => (
                   <a
                     key={label}

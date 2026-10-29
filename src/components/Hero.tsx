@@ -18,15 +18,7 @@ export function Hero() {
   return (
     <section
       ref={ref}
-      style={{
-        minHeight: '100vh',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        paddingTop: '80px',
-        paddingBottom: '5rem',
-        borderBottom: '1px solid var(--border)',
-      }}
+      className="hero-section"
     >
       <div className="container">
         {/* Headline */}
@@ -38,12 +30,12 @@ export function Hero() {
           style={{
             fontFamily: 'var(--font-serif)',
             fontWeight: 400,
-            fontSize: 'clamp(2.5rem, 6vw, 5rem)',
-            lineHeight: 1.1,
+            fontSize: 'clamp(2.1rem, 6.5vw, 4.5rem)',
+            lineHeight: 1.12,
             letterSpacing: '-0.02em',
             color: 'var(--strong)',
             maxWidth: '820px',
-            marginBottom: '2rem',
+            marginBottom: '1.5rem',
           }}
         >
           {SITE.tagline}
@@ -56,11 +48,11 @@ export function Hero() {
           initial="hidden"
           animate={inView ? 'visible' : 'hidden'}
           style={{
-            fontSize: '1.05rem',
+            fontSize: '1rem',
             color: 'var(--subtle)',
             maxWidth: '520px',
             lineHeight: 1.7,
-            marginBottom: '3rem',
+            marginBottom: '2.5rem',
           }}
         >
           {SITE.subTagline}
@@ -72,7 +64,7 @@ export function Hero() {
           variants={fadeUp}
           initial="hidden"
           animate={inView ? 'visible' : 'hidden'}
-          style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}
+          className="hero-cta-group"
         >
           <a
             href="#work"
@@ -81,19 +73,19 @@ export function Hero() {
               display: 'inline-flex',
               alignItems: 'center',
               gap: '8px',
-              padding: '0.75rem 1.5rem',
+              padding: '0.8rem 1.6rem',
               background: 'var(--white)',
               color: 'var(--bg)',
               fontSize: '0.875rem',
               fontWeight: 500,
               letterSpacing: '0.02em',
-              borderRadius: '2px',
+              borderRadius: '3px',
               transition: 'opacity 0.2s ease',
             }}
             onMouseEnter={e => (e.currentTarget.style.opacity = '0.88')}
             onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
           >
-            View selected work
+            <span>View selected work</span>
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
               <path d="M1 7h12M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
@@ -105,12 +97,12 @@ export function Hero() {
             style={{
               display: 'inline-flex',
               alignItems: 'center',
-              padding: '0.75rem 1.5rem',
+              padding: '0.8rem 1.6rem',
               border: '1px solid var(--border)',
               color: 'var(--text)',
               fontSize: '0.875rem',
               fontWeight: 400,
-              borderRadius: '2px',
+              borderRadius: '3px',
               transition: 'border-color 0.2s ease, color 0.2s ease',
             }}
             onMouseEnter={e => {
@@ -122,7 +114,7 @@ export function Hero() {
               e.currentTarget.style.color = 'var(--text)'
             }}
           >
-            Let's work together
+            <span>Let's work together</span>
           </a>
         </motion.div>
 
@@ -132,14 +124,7 @@ export function Hero() {
           variants={fadeUp}
           initial="hidden"
           animate={inView ? 'visible' : 'hidden'}
-          style={{
-            position: 'absolute',
-            bottom: '2.5rem',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            gap: '8px',
-          }}
+          className="hero-scroll-indicator"
         >
           <span style={{ fontSize: '0.65rem', letterSpacing: '0.1em', color: 'var(--muted)', textTransform: 'uppercase' }}>Scroll</span>
           <div style={{ width: '1px', height: '40px', background: 'var(--border)', position: 'relative', overflow: 'hidden' }}>

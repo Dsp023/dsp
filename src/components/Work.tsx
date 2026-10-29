@@ -23,50 +23,46 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       variants={fadeUp}
       initial="hidden"
       animate={inView ? 'visible' : 'hidden'}
+      className="project-card"
       style={{
-        borderTop: '1px solid var(--border)',
-        padding: '2.5rem 0',
-        display: 'grid',
-        gridTemplateColumns: '1fr 1fr',
-        gap: '3rem',
-        alignItems: 'start',
         opacity: isPlaceholder ? 0.5 : 1,
       }}
     >
       {/* Left: meta */}
       <div>
-        <span className="section-label" style={{ display: 'block', marginBottom: '1rem' }}>
+        <span className="section-label" style={{ display: 'block', marginBottom: '0.85rem' }}>
           {String(index + 1).padStart(2, '0')} — {project.category}
         </span>
         <h3
           style={{
             fontFamily: 'var(--font-serif)',
             fontWeight: 400,
-            fontSize: '1.75rem',
+            fontSize: 'clamp(1.4rem, 3.5vw, 1.85rem)',
             color: 'var(--strong)',
-            marginBottom: '1rem',
+            marginBottom: '0.85rem',
             letterSpacing: '-0.01em',
+            lineHeight: 1.25,
           }}
         >
           {project.title}
         </h3>
-        <p style={{ fontSize: '0.9rem', color: 'var(--subtle)', lineHeight: 1.7, marginBottom: '1.5rem' }}>
+        <p style={{ fontSize: '0.9rem', color: 'var(--subtle)', lineHeight: 1.7, marginBottom: '1.25rem' }}>
           {isPlaceholder ? '— project description coming soon —' : project.description}
         </p>
 
         {/* Tech tags */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '1.5rem' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.45rem', marginBottom: '1.5rem' }}>
           {project.tech.map((t) => (
             <span
               key={t}
               style={{
-                fontSize: '0.7rem',
+                fontSize: '0.68rem',
                 letterSpacing: '0.06em',
                 textTransform: 'uppercase',
                 color: 'var(--muted)',
                 border: '1px solid var(--border)',
-                padding: '3px 10px',
-                borderRadius: '1px',
+                padding: '3px 9px',
+                borderRadius: '3px',
               }}
             >
               {t}
@@ -76,24 +72,23 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 
         {/* Links */}
         {!isPlaceholder && (
-          <div style={{ display: 'flex', gap: '1.25rem' }}>
+          <div className="project-actions-row">
             {project.liveUrl && (
               <a
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
-                  fontSize: '0.8rem',
-                  color: 'var(--subtle)',
-                  display: 'flex',
+                  fontSize: '0.82rem',
+                  color: 'var(--strong)',
+                  display: 'inline-flex',
                   alignItems: 'center',
-                  gap: '5px',
-                  transition: 'color 0.2s',
+                  gap: '6px',
+                  fontWeight: 500,
+                  transition: 'opacity 0.2s',
                 }}
-                onMouseEnter={e => (e.currentTarget.style.color = 'var(--strong)')}
-                onMouseLeave={e => (e.currentTarget.style.color = 'var(--subtle)')}
               >
-                Live demo
+                <span>Live demo</span>
                 <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
                   <path d="M1 9L9 1M4 1h5v5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
@@ -105,17 +100,17 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
-                  fontSize: '0.8rem',
+                  fontSize: '0.82rem',
                   color: 'var(--subtle)',
-                  display: 'flex',
+                  display: 'inline-flex',
                   alignItems: 'center',
-                  gap: '5px',
+                  gap: '6px',
                   transition: 'color 0.2s',
                 }}
                 onMouseEnter={e => (e.currentTarget.style.color = 'var(--strong)')}
                 onMouseLeave={e => (e.currentTarget.style.color = 'var(--subtle)')}
               >
-                GitHub
+                <span>GitHub</span>
                 <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
                   <path d="M1 9L9 1M4 1h5v5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
@@ -126,19 +121,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       </div>
 
       {/* Right: preview */}
-      <div
-        style={{
-          aspectRatio: '16/10',
-          background: 'var(--bg-3)',
-          border: '1px solid var(--border)',
-          borderRadius: '4px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          overflow: 'hidden',
-          position: 'relative',
-        }}
-      >
+      <div className="project-preview-wrap">
         {isPlaceholder ? (
           <span style={{ fontSize: '0.75rem', color: 'var(--muted)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
             Screenshot coming soon

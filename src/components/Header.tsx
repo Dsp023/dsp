@@ -104,15 +104,19 @@ export function Header() {
             style={{
               display: 'none',
               flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              width: '44px',
+              height: '44px',
               gap: '5px',
-              padding: '4px',
+              padding: '6px',
               color: 'var(--text)',
             }}
             id="mobile-menu-btn"
           >
-            <span style={{ display: 'block', width: '20px', height: '1px', background: 'currentColor', transition: 'transform 0.2s' }} />
-            <span style={{ display: 'block', width: '20px', height: '1px', background: 'currentColor', transition: 'opacity 0.2s' }} />
-            <span style={{ display: 'block', width: '20px', height: '1px', background: 'currentColor', transition: 'transform 0.2s' }} />
+            <span style={{ display: 'block', width: '22px', height: '1.5px', background: 'currentColor', transition: 'all 0.2s', transform: menuOpen ? 'rotate(45deg) translate(4px, 4px)' : 'none' }} />
+            <span style={{ display: 'block', width: '22px', height: '1.5px', background: 'currentColor', transition: 'all 0.2s', opacity: menuOpen ? 0 : 1 }} />
+            <span style={{ display: 'block', width: '22px', height: '1.5px', background: 'currentColor', transition: 'all 0.2s', transform: menuOpen ? 'rotate(-45deg) translate(5px, -5px)' : 'none' }} />
           </button>
         </div>
       </header>
@@ -121,53 +125,69 @@ export function Header() {
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -8 }}
+            initial={{ opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.2 }}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
             style={{
               position: 'fixed',
               inset: 0,
-              zIndex: 40,
-              background: 'var(--bg)',
+              zIndex: 49,
+              background: 'rgba(14, 14, 14, 0.98)',
+              backdropFilter: 'blur(16px)',
               display: 'flex',
               flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '2rem',
+              justifyContent: 'space-between',
+              padding: '6rem 2rem 3rem',
             }}
           >
-            <button
-              onClick={closeMenu}
-              aria-label="Close menu"
-              style={{
-                position: 'absolute',
-                top: '1.5rem',
-                right: '1.5rem',
-                fontSize: '1.5rem',
-                color: 'var(--subtle)',
-                background: 'none',
-                border: 'none',
-                cursor: 'pointer',
-              }}
-            >
-              ×
-            </button>
-            {NAV_LINKS.map((link) => (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
+              <span className="section-label" style={{ marginBottom: '0.5rem' }}>Navigation</span>
+              {NAV_LINKS.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={closeMenu}
+                  style={{
+                    fontFamily: 'var(--font-serif)',
+                    fontSize: '2.4rem',
+                    color: 'var(--strong)',
+                    fontWeight: 400,
+                    lineHeight: 1.1,
+                    letterSpacing: '-0.02em',
+                  }}
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
+
+            {/* Mobile menu bottom drawer footer */}
+            <div style={{ borderTop: '1px solid var(--border)', paddingTop: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              {SITE.available && (
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.82rem', color: 'var(--subtle)' }}>
+                  <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#4ade80', animation: 'pulse 2s infinite' }} />
+                  <span>Available for freelance projects</span>
+                </div>
+              )}
               <a
-                key={link.href}
-                href={link.href}
+                href={`mailto:${SITE.email}`}
                 onClick={closeMenu}
                 style={{
-                  fontFamily: 'var(--font-serif)',
-                  fontSize: '2rem',
-                  color: 'var(--strong)',
-                  fontWeight: 400,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  padding: '0.85rem 1.25rem',
+                  background: 'var(--white)',
+                  color: 'var(--bg)',
+                  fontSize: '0.88rem',
+                  fontWeight: 500,
+                  borderRadius: '3px',
                 }}
               >
-                {link.label}
+                Get in touch
               </a>
-            ))}
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -175,8 +195,8 @@ export function Header() {
       {/* Inline responsive styles */}
       <style>{`
         @keyframes pulse {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0.4; }
+          0%, 100% { opacity: 1; transform: scale(1); }
+          50% { opacity: 0.4; transform: scale(0.85); }
         }
         @media (max-width: 640px) {
           header nav { display: none !important; }

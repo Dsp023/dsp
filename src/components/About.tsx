@@ -33,12 +33,7 @@ export function About() {
       <div className="container">
         <div
           ref={ref}
-          style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr 1.6fr',
-            gap: '5rem',
-            alignItems: 'start',
-          }}
+          className="about-grid"
         >
           {/* Left col */}
           <div>
